@@ -140,8 +140,14 @@ alt + ctrl + shift + space
 super + r
         xbacklight -dec 5
 
+XF86MonBrightnessDown
+		xbacklight -dec 5
+
 super + t
         xbacklight -inc 5
+
+XF86MonBrightnessUp
+		xbacklight -inc 5
 
 super + w
 		xbacklight -set 15
