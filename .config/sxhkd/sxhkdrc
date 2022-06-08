@@ -25,6 +25,9 @@ ctrl + 1
 ctrl + 2
 		pactl set-default-sink alsa_output.usb-FiiO_FiiO_BTR3K_ABCDEF0123456789-00.analog-stereo
 
+ctrl + 3
+		pactl set-default-sink bluez_output.40_ED_98_1A_42_0F.a2dp-sink
+
 # terminal emulator
 alt + Return
 	kitty
