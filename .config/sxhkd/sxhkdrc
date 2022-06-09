@@ -41,7 +41,7 @@ alt + Escape
 	pkill -USR1 -x sxhkd
 
 alt + BackSpace
-	betterlockscreen -l dimblur
+	betterlockscreen -l blur
 
 #
 # bspwm hotkeys
