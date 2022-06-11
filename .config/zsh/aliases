@@ -28,7 +28,8 @@ alias zat="zathura"
 alias ts="sudo timeshift"
 
 # Restart services
-alias rmb="sudo vim /etc/mbpfan.conf && sudo systemctl restart mbpfan"
+alias fblast="sudo cp ~/.config/fan/fullblast.conf /etc/mbpfan.conf && sudo systemctl restart mbpfan"
+alias ablast="sudo cp ~/.config/fan/automatic.conf /etc/mbpfan.conf && sudo systemctl restart mbpfan"
 
 # Wacom 
 alias wac="init-wacom"

@@ -58,6 +58,8 @@ unsetopt BG_NICE # Makes it so that alacritty doesn't give a random prompt whene
 bindkey -s '^o' 'lfcd\n'
 bindkey -s '^p' 'startx\n'
 bindkey -s '^r' 'resource\n'
+bindkey -s '^f' 'fblast\n'
+bindkey -s '^a' 'ablast\n'
 
 # Run neofetch on startup
 neofetch
