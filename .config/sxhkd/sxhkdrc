@@ -22,6 +22,7 @@ super + q
 # Switch pactl sinks
 ctrl + 1
 		pactl set-default-sink alsa_output.pci-0000_02_00.3.builtin-speaker
+
 ctrl + 2
 		pactl set-default-sink alsa_output.usb-FiiO_FiiO_BTR3K_ABCDEF0123456789-00.analog-stereo
 
@@ -182,4 +183,4 @@ super + shift + {h,l}
 
 # Unmount everything
 super + u
-        udiskie-umount -a
+        umount -a
