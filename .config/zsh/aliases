@@ -26,10 +26,12 @@ alias gitdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 # Convenience
 alias zat="zathura"
 alias ts="sudo timeshift"
+alias usage="btrfs filesystem usage /"
 
 # Restart services
 alias fblast="sudo cp ~/.config/fan/fullblast.conf /etc/mbpfan.conf && sudo systemctl restart mbpfan"
 alias ablast="sudo cp ~/.config/fan/automatic.conf /etc/mbpfan.conf && sudo systemctl restart mbpfan"
+alias rmb="sudo vim /etc/mbpfan.conf && sudo systemctl restart mbpfan"
 
 # Wacom 
 alias wac="init-wacom"
