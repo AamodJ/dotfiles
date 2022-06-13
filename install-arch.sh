@@ -23,7 +23,7 @@ echo "Git configured"
 cd dotfiles 
 
 echo "Installing dependencies"
-yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf mbpfan spaceship-prompt-git picom-ibhagwan-git brightnessctl zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie 
+yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf mbpfan spaceship-prompt-git picom-ibhagwan-git brightnessctl zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie wireguard-tools msr-tools 
 
 echo "Copying configs"
 cp -r .config/* ~/.config/
