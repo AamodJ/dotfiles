@@ -43,6 +43,10 @@ touch ~/.config/z/.z
 # In sxhkdrc, scrot saves the screenshots to ~/Pictures/Screenshots, so we need to create the Screenshots folder 
 mkdir ~/Pictures/Screenshots
 
+# bspswallow 
+cd ~/git-clones
+git clone https://github.com/salman-abedin/bspwm_swallow.git && cd bspwm_swallow && sudo make install
+
 echo "Configured!"
 sleep 3
 
