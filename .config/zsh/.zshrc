@@ -60,6 +60,7 @@ bindkey -s '^p' 'startx\n'
 bindkey -s '^r' 'resource\n'
 bindkey -s '^f' 'fblast\n'
 bindkey -s '^a' 'ablast\n'
+bindkey -s '^y' 'sensors | grep Core\n'
 
 # Run neofetch on startup
 neofetch
