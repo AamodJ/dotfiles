@@ -39,5 +39,7 @@ bspc rule -a dmenu state=floating center=on private=on layer=above
 
 xsetroot -cursor_name left_ptr &
 
+pgrep bspswallow || bspswallow &
+
 ~/.dotfiles/wmstuff
 dunst 
