@@ -25,7 +25,7 @@ alias gitdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
 # Convenience
 alias zat="zathura"
-alias ts="sudo timeshift"
+alias ts="sudo timeshift --snapshot-device /dev/nvme0n1p4"
 alias usage="btrfs filesystem usage /"
 
 # Restart services
