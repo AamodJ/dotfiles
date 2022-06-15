@@ -23,7 +23,7 @@ echo "Git configured"
 cd dotfiles 
 
 echo "Installing dependencies"
-yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf mbpfan spaceship-prompt-git picom-ibhagwan-git brightnessctl zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie wireguard-tools msr-tools 
+yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf mbpfan spaceship-prompt-git picom-ibhagwan-git brightnessctl zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie wireguard-tools msr-tools xf86-input-synaptics
 
 echo "Copying configs"
 cp -r .config/* ~/.config/
@@ -39,6 +39,7 @@ cd ~/.dotfiles/dmenu
 makepkg -si
 mkdir ~/.config/z
 touch ~/.config/z/.z
+sudo cp ~/.config/trackpad/70-synaptics.conf /etc/X11/xorg.conf.d/
 
 # In sxhkdrc, scrot saves the screenshots to ~/Pictures/Screenshots, so we need to create the Screenshots folder 
 mkdir ~/Pictures/Screenshots
