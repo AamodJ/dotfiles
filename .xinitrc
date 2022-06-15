@@ -15,6 +15,9 @@ pactl set-sink-volume @DEFAULT_SINK@ 75%
 # Set keyboard input delay
 xset r rate 250 70
 
+# Swap caps and escape and make both shift press = caps
+setxkbmap -option caps:escape,shift:both_capslock & 
+
 # loop bspwm
 # while true; do
 # 	bspwm >/dev/null 2>&1
