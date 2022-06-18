@@ -23,7 +23,7 @@ echo "Git configured"
 cd dotfiles 
 
 echo "Installing dependencies"
-yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf mbpfan spaceship-prompt-git picom-ibhagwan-git brightnessctl zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie wireguard-tools msr-tools xf86-input-synaptics
+yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf mbpfan spaceship-prompt-git picom-ibhagwan-git brightnessctl zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie wireguard-tools msr-tools xf86-input-synaptics gimp libreoffice-still nautilus adb scrcpy compsize ani-cli
 
 echo "Copying configs"
 cp -r .config/* ~/.config/
@@ -40,13 +40,12 @@ makepkg -si
 mkdir ~/.config/z
 touch ~/.config/z/.z
 sudo cp ~/.config/trackpad/70-synaptics.conf /etc/X11/xorg.conf.d/
+echo "Fixing ani-cli"
+sudo cp ~/.config/ani-cli-fix/* /usr/bin/
+echo "ani-cli fixed!"
 
 # In sxhkdrc, scrot saves the screenshots to ~/Pictures/Screenshots, so we need to create the Screenshots folder 
 mkdir ~/Pictures/Screenshots
-
-# bspswallow 
-cd ~/git-clones
-git clone https://github.com/salman-abedin/bspwm_swallow.git && cd bspwm_swallow && sudo make install
 
 echo "Configured!"
 sleep 3
@@ -81,6 +80,12 @@ sudo systemctl start mbpfan.service
 cd ..
 rm -rf mbpfan
 echo "Fan Fixed!"
+sleep 3
+echo "Fixing suspend"
+sudo cp ~/.config/suspend/rmmod_tb.sh /lib/systemd/system-sleep/rmmod_tb.sh
+sudo chmod 755 /lib/systemd/system-sleep/rmmod_tb.sh
+sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
+echo "Suspend fixed!"
 
 sleep 3
 echo "Installation complete. For changes to take effect, reboot."
