@@ -1,5 +1,3 @@
-export PATH="$PATH:$HOME/.local/bin"
-
 # Plugins
 source ~/.config/zsh/zsh-z.plugin.zsh
 
@@ -63,4 +61,4 @@ bindkey -s '^a' 'ablast\n'
 bindkey -s '^y' 'sensors | grep Core\n'
 
 # Run neofetch on startup
-# neofetch
+neofetch
