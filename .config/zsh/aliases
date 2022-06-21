@@ -7,6 +7,8 @@ alias aliases="vim ~/.config/zsh/aliases"
 # Config files 
 alias cfv="vim ~/.config/vim/.vimrc"
 alias cfz="vim ~/.config/zsh/.zshrc"
+alias cfzp="vim ~/.config/zsh/.zprofile"
+alias cfx="vim ~/.config/X11/.xinitrc"
 alias cfm="vim ~/.config/mutt/muttrc"
 alias cfmb="vim ~/.mbsyncrc"
 alias cflf="vim ~/.config/lf/lfrc"

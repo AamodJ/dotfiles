@@ -4,7 +4,7 @@
 autocutsel -selection PRIMARY -fork
 
 # Initialise Xresources
-xrdb -merge ~/.Xresources &
+xrdb -merge ~/.config/X11/.Xresources &
 
 # Set brightness
 xbacklight -set 20
