@@ -56,11 +56,11 @@ unsetopt BG_NICE # Makes it so that alacritty doesn't give a random prompt whene
 
 # Keybinds
 bindkey -s '^o' 'lfcd\n'
-bindkey -s '^p' 'startx\n'
+bindkey -s '^p' 'startx ~/.config/X11/.xinitrc\n'
 bindkey -s '^r' 'resource\n'
 bindkey -s '^f' 'fblast\n'
 bindkey -s '^a' 'ablast\n'
 bindkey -s '^y' 'sensors | grep Core\n'
 
 # Run neofetch on startup
-neofetch
+# neofetch
