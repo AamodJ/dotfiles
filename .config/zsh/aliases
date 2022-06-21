@@ -28,7 +28,7 @@ alias zat="zathura"
 alias ts="sudo timeshift --snapshot-device /dev/nvme0n1p4"
 alias usage="btrfs filesystem usage /"
 alias smtp="simple-mtpfs"
-alias csc="scrcpy --tcpip=192.168.1.51 --max-fps 15"
+alias csc="scrcpy --tcpip=192.168.1.51"
 
 # Restart services
 alias fblast="sudo cp ~/.config/fan/fullblast.conf /etc/mbpfan.conf && sudo systemctl restart mbpfan"
