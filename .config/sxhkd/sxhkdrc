@@ -184,3 +184,7 @@ super + shift + {h,l}
 # Unmount everything
 super + u
         umount -a
+
+# Open App
+super + c
+	chromium --force-dark-mode --enable-features=WebUIDarkMode
