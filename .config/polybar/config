@@ -116,7 +116,7 @@ modules-left = cpu
 ;;;;;; TOP BAR ;;;;;
 
 [bar/bar]
-background = #00000000
+background = #EE1a1b26
 foreground = ${colors.fore}
 
 width                    = 100%
