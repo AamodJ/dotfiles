@@ -6,6 +6,9 @@
 Print
         scrot ~/Pictures/Screenshots/%Y-%m-%d-screenshot.png
 
+super + p
+        scrot ~/Pictures/Screenshots/%Y-%m-%d-screenshot.png
+
 # volume
 XF86AudioRaiseVolume
         pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -30,19 +33,19 @@ ctrl + 3
 		pactl set-default-sink bluez_output.40_ED_98_1A_42_0F.a2dp-sink
 
 # terminal emulator
-alt + Return
+super + Return
 	kitty
 
 # program launcher
-alt + w
+super + space
     ~/.dotfiles/dm
 
 # make sxhkd reload its configuration files:
-alt + Escape
+super + Escape
 	pkill -USR1 -x sxhkd
 
-alt + BackSpace
-	betterlockscreen -l blur
+super + BackSpace
+	betterlockscreen -l blur --off 5
 
 #
 # bspwm hotkeys
@@ -114,7 +117,7 @@ alt + {o,i}
 	bspc wm -h on
 
 # focus or send to the given desktop
-alt + {_,shift + }{1-9,0}
+super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
@@ -156,7 +159,13 @@ super + w
 super + g
 		brightnessctl --device='apple::kbd_backlight' set 50+
 
+XF86KbdBrightnessUp 
+		brightnessctl --device='apple::kbd_backlight' set 50+
+
 super + f
+		brightnessctl --device='apple::kbd_backlight' set 50-
+
+XF86KbdBrightnessDown
 		brightnessctl --device='apple::kbd_backlight' set 50-
 
 # expand a window by moving one of its side outward
