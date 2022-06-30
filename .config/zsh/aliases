@@ -7,20 +7,15 @@ alias aliases="vim ~/.config/zsh/aliases"
 # Config files 
 alias cfv="vim ~/.config/vim/.vimrc"
 alias cfz="vim ~/.config/zsh/.zshrc"
+alias cfzen="vim ~/.config/zsh/.zshenv"
 alias cfzp="vim ~/.config/zsh/.zprofile"
 alias cfx="vim ~/.config/X11/.xinitrc"
 alias cfm="vim ~/.config/mutt/muttrc"
 alias cfmb="vim ~/.mbsyncrc"
 alias cflf="vim ~/.config/lf/lfrc"
 alias cflfs="vim ~/.config/lf/scope"
-alias cfmpd="vim ~/.mpd/mpd.conf"
-alias cfncm="vim ~/.config/ncmpcpp/config"
-alias cfncb="vim ~/.config/ncmpcpp/bindings"
 alias cfb="vim ~/.config/bspwm/bspwmrc"
 alias cfsx="vim ~/.config/sxhkd/sxhkdrc"
-
-## Cronjobs
-alias mupd="vim ~/.config/cron/mail-update"
 
 # dotfiles alias
 alias gitdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
@@ -39,3 +34,6 @@ alias rmb="sudo vim /etc/mbpfan.conf && sudo systemctl restart mbpfan"
 
 # Wacom 
 alias wac="init-wacom"
+
+# Cleanup
+alias wget=wget --hsts-file="$XDG_DATA_HOME/.config/wget/wget-hsts"
