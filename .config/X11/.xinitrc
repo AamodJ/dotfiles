@@ -8,6 +8,7 @@ xrdb -merge ~/.config/X11/.Xresources &
 
 # Set brightness
 sudo brillo -S 15
+sudo brillo -S 0 -k
 
 # Set volume
 pactl set-sink-volume @DEFAULT_SINK@ 75%
@@ -26,5 +27,8 @@ ERRFILE="$XDG_CACHE_HOME/.config/X11/xsession-errors"
 # 	bspwm >/dev/null 2>&1
 # done
 
+# Start daemons
+volnoti -t 1
+dunst &
 # open bspwm
 exec bspwm
