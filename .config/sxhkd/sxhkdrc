@@ -11,26 +11,26 @@ super + p
 
 # volume
 XF86AudioRaiseVolume
-        pactl set-sink-volume @DEFAULT_SINK@ +5%
+        pactl set-sink-volume @DEFAULT_SINK@ +5% && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
 
 XF86AudioLowerVolume
-        pactl set-sink-volume @DEFAULT_SINK@ -5%
+        pactl set-sink-volume @DEFAULT_SINK@ -5% && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
 
 XF86AudioMute
-        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        pactl set-sink-mute @DEFAULT_SINK@ toggle; if pactl get-sink-mute @DEFAULT_SINK@ | grep -Po "\byes\b"; then volnoti-show -m; else volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1); fi
 
 super + q
-		pactl set-sink-volume @DEFAULT_SINK@ 75%
+		pactl set-sink-volume @DEFAULT_SINK@ 75% && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
 
 # Switch pactl sinks
 ctrl + 1
-		pactl set-default-sink alsa_output.pci-0000_02_00.3.builtin-speaker
+		pactl set-default-sink alsa_output.pci-0000_02_00.3.builtin-speaker && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
 
 ctrl + 2
-		pactl set-default-sink alsa_output.usb-FiiO_FiiO_BTR3K_ABCDEF0123456789-00.analog-stereo
+		pactl set-default-sink alsa_output.usb-FiiO_FiiO_BTR3K_ABCDEF0123456789-00.analog-stereo && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
 
 ctrl + 3
-		pactl set-default-sink bluez_output.40_ED_98_1A_42_0F.a2dp-sink
+		pactl set-default-sink bluez_output.40_ED_98_1A_42_0F.a2dp-sink && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
 
 # terminal emulator
 super + Return

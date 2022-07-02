@@ -23,7 +23,7 @@ echo "Git configured"
 cd dotfiles 
 
 echo "Installing dependencies"
-yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf mbpfan spaceship-prompt-git picom-ibhagwan-git zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie wireguard-tools msr-tools xf86-input-synaptics gimp libreoffice-still nautilus adb scrcpy compsize ani-cli texlive-core texlive-bin texlive-latexextra texlive-bibtexextra xf86-input-wacom brillo
+yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf mbpfan spaceship-prompt-git picom-ibhagwan-git zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie wireguard-tools msr-tools xf86-input-synaptics gimp libreoffice-still nautilus adb scrcpy compsize ani-cli texlive-core texlive-bin texlive-latexextra texlive-bibtexextra xf86-input-wacom brillo volnoti
 
 echo "Copying configs"
 cp -r .config/* ~/.config/
