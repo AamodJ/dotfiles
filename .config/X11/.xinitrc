@@ -7,7 +7,7 @@ autocutsel -selection PRIMARY -fork
 xrdb -merge ~/.config/X11/.Xresources &
 
 # Set brightness
-xbacklight -set 20
+sudo brillo -S 15
 
 # Set volume
 pactl set-sink-volume @DEFAULT_SINK@ 75%

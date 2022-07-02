@@ -141,32 +141,34 @@ alt + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 # Backlight
+## Screen
 super + r
-        xbacklight -dec 5
+		sudo brillo -U 5 -q -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
 
 XF86MonBrightnessDown
-		xbacklight -dec 5
+		sudo brillo -U 5 -q -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
 
 super + t
-        xbacklight -inc 5
+		sudo brillo -A 5 -q -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
 
 XF86MonBrightnessUp
-		xbacklight -inc 5
+		sudo brillo -A 5 -q -u 300000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
 
 super + w
-		xbacklight -set 15
+		sudo brillo -S 15 -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
 
+## Keyboard 
 super + g
-		brightnessctl --device='apple::kbd_backlight' set 50+
+		sudo brillo -A 10 -k -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G -k)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Keyboard Backlight: $brightness%" -t 2000
 
 XF86KbdBrightnessUp 
-		brightnessctl --device='apple::kbd_backlight' set 50+
+		sudo brillo -A 10 -k -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G -k)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Keyboard Backlight: $brightness%" -t 2000
 
 super + f
-		brightnessctl --device='apple::kbd_backlight' set 50-
+		sudo brillo -U 10 -k -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G -k)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Keyboard Backlight: $brightness%" -t 2000
 
 XF86KbdBrightnessDown
-		brightnessctl --device='apple::kbd_backlight' set 50-
+		sudo brillo -U 10 -k -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G -k)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Keyboard Backlight: $brightness%" -t 2000
 
 # expand a window by moving one of its side outward
 alt + shift + {h,j,k,l}
@@ -197,3 +199,13 @@ super + u
 # Open App
 super + c
 	chromium --force-dark-mode --enable-features=WebUIDarkMode
+
+super + s 
+	spotify --force-device-scale-factor=1.75
+
+# Fan control
+super + alt + y
+	sudo fblast
+
+super + alt + u
+	sudo ablast
