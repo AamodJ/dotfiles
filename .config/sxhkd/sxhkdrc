@@ -203,9 +203,9 @@ super + c
 super + s 
 	spotify --force-device-scale-factor=1.75
 
-# # Fan control (WIP)
-# super + alt + f
-# 	 sudo fblast
+# Fan control
+super + alt + f
+	 sudo fblast
 
-# super + alt + a
-# 	 sudo ablast
+super + alt + a
+	 sudo ablast
