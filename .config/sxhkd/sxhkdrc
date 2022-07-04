@@ -11,26 +11,26 @@ super + p
 
 # volume
 XF86AudioRaiseVolume
-        pactl set-sink-volume @DEFAULT_SINK@ +5% && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
+        sink up
 
 XF86AudioLowerVolume
-        pactl set-sink-volume @DEFAULT_SINK@ -5% && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
+        sink down
 
 XF86AudioMute
-        pactl set-sink-mute @DEFAULT_SINK@ toggle; if pactl get-sink-mute @DEFAULT_SINK@ | grep -Po "\byes\b"; then volnoti-show -m; else volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1); fi
+        sink togglemute
 
 super + q
-		pactl set-sink-volume @DEFAULT_SINK@ 75% && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
+        sink set
 
 # Switch pactl sinks
 ctrl + 1
-		pactl set-default-sink alsa_output.pci-0000_02_00.3.builtin-speaker && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
+        sink speakers
 
 ctrl + 2
-		pactl set-default-sink alsa_output.usb-FiiO_FiiO_BTR3K_ABCDEF0123456789-00.analog-stereo && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
+        sink fiiO
 
 ctrl + 3
-		pactl set-default-sink bluez_output.40_ED_98_1A_42_0F.a2dp-sink && volnoti-show $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)
+        sink bluetooth
 
 # terminal emulator
 super + Return
@@ -203,9 +203,9 @@ super + c
 super + s 
 	spotify --force-device-scale-factor=1.75
 
-# Fan control
-super + alt + y
-	sudo fblast
+# # Fan control (WIP)
+# super + alt + f
+# 	 sudo fblast
 
-super + alt + u
-	sudo ablast
+# super + alt + a
+# 	 sudo ablast
