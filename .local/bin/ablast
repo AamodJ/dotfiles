@@ -1,4 +1,4 @@
 #!/bin/sh
 
-sudo cp ~/.config/fan/automatic.conf /etc/mbpfan.conf 
+sudo cp $HOME/.config/fan/automatic.conf /etc/mbpfan.conf 
 sudo systemctl restart mbpfan
