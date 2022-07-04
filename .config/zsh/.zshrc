@@ -1,5 +1,3 @@
-export PATH="$PATH:$HOME/.local/bin"
-
 # Plugins
 source ~/.config/zsh/zsh-z.plugin.zsh
 
