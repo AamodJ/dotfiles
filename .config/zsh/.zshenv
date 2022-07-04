@@ -5,7 +5,6 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # Clean up 
-export ZDOTDIR="$HOME/.config/zsh" 
 export VIMINIT="source $HOME/.config/vim/.vimrc" 
 export ZSHZ_DATA="$HOME/.config/z/.z" 
 export VLC="/Applications/VLC.app/Contents/MacOS/VLC"

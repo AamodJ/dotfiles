@@ -1,7 +1,6 @@
 set nocompatible
 
 " Clean up
-set viminfofile="$HOME/.config/vim/.viminfo"
 source $HOME/.config/vim/xdg.vim
 
 call vundle#begin()
