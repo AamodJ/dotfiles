@@ -1,0 +1,35 @@
+#!/bin/sh
+
+function send_notification () {
+	brightness=$(printf "%.0f\n" $(brillo -G)) 
+	dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
+}
+
+function send_notification_kbd () {
+	brightness=$(printf "%.0f\n" $(brillo -G -k)) 
+	dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Keyboard Brightness: $brightness%" -t 2000
+}
+
+case $1 in 
+monup) 
+	sudo brillo -A 5 -q -u 150000 
+	send_notification $1
+	;;
+mondown) 
+	sudo brillo -U 5 -q -u 150000 
+	send_notification $1
+	;;
+setmon)
+	sudo brillo -S 15 -u 150000
+	send_notification $1
+	;;
+kbdup)
+	sudo brillo -A 10 -u 150000 -k
+	send_notification_kbd $1
+	;;
+kbddown)
+	sudo brillo -U 10 -u 150000 -k
+	send_notification_kbd $1
+	;;
+esac
+

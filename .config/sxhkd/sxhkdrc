@@ -99,16 +99,21 @@ super + {_,ctrl + }{h,j,k,l}
 #	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous node in the current desktop
-alt + {_,shift + }Tab
-	bspc node -f {next,prev}.local
+# alt + {_,shift + }Tab
+# 	bspc node -f {next,prev}.local
 
 # focus the next/previous desktop in the current monitor
 alt + bracket{left,right}
 	bspc node @/ -R 180
 
 # focus the last node/desktop
-#alt + {grave,Tab}
-#	bspc {node,desktop} -f last
+alt + Tab
+	bspc node -f last
+
+super + Tab 
+	bspc desktop -f last
+# alt + {grave,Tab}
+# 	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
 alt + {o,i}
@@ -143,32 +148,32 @@ alt + ctrl + shift + space
 # Backlight
 ## Screen
 super + r
-		sudo brillo -U 5 -q -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
+	backlight mondown
 
 XF86MonBrightnessDown
-		sudo brillo -U 5 -q -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
+	backlight mondown
 
 super + t
-		sudo brillo -A 5 -q -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
+	backlight monup
 
 XF86MonBrightnessUp
-		sudo brillo -A 5 -q -u 300000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
+	backlight monup
 
 super + w
-		sudo brillo -S 15 -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%" -t 2000
+	backlight setmon
 
 ## Keyboard 
 super + g
-		sudo brillo -A 10 -k -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G -k)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Keyboard Backlight: $brightness%" -t 2000
+	backlight kbdup
 
 XF86KbdBrightnessUp 
-		sudo brillo -A 10 -k -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G -k)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Keyboard Backlight: $brightness%" -t 2000
+	backlight kbdup
 
 super + f
-		sudo brillo -U 10 -k -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G -k)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Keyboard Backlight: $brightness%" -t 2000
+	backlight kbddown
 
 XF86KbdBrightnessDown
-		sudo brillo -U 10 -k -u 150000 && brightness=$(printf "%.0f\n" $(brillo -G -k)) && dunstify -a "changebrightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Keyboard Backlight: $brightness%" -t 2000
+	backlight kbddown
 
 # expand a window by moving one of its side outward
 alt + shift + {h,j,k,l}
