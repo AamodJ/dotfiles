@@ -17,6 +17,14 @@ function allow_inc() {
 	fi
 }
 
+function toggle() {
+	if [[ "$(pactl get-sink-mute @DEFAULT_SINK@ | grep -Po "\byes\b")" = "yes" ]]
+	then
+		pactl set-sink-mute @DEFAULT_SINK@ toggle
+	fi
+}
+
+toggle
 case $1 in 
 up) 
 	if allow_inc
