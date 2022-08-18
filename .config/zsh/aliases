@@ -27,6 +27,10 @@ alias ts="sudo timeshift --snapshot-device /dev/nvme0n1p4"
 alias usage="btrfs filesystem usage /"
 alias smtp="simple-mtpfs"
 alias csc="scrcpy --tcpip=192.168.1.48"
+alias lf="lfrun"
+alias vi="vim"
+alias cur="calcurse"
+alias pg="ping google.com"
 
 # Restart services
 alias rmb="sudo vim /etc/mbpfan.conf && sudo systemctl restart mbpfan"

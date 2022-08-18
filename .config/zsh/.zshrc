@@ -5,7 +5,7 @@ source ~/.config/zsh/zsh-z.plugin.zsh
 # Use lf to switch directories and bind it to ctrl-o
 lfcd () {
     tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
+    lfrun -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
         rm -f "$tmp" >/dev/null
@@ -54,11 +54,12 @@ unsetopt BG_NICE # Makes it so that alacritty doesn't give a random prompt whene
 
 # Keybinds
 bindkey -s '^o' 'lfcd\n'
-bindkey -s '^p' 'startx ~/.config/X11/.xinitrc\n'
 bindkey -s '^r' 'resource\n'
-bindkey -s '^f' 'fblast\n'
-bindkey -s '^a' 'ablast\n'
 bindkey -s '^y' 'sensors | grep Core\n'
 
-# Run neofetch on startup
+# Import colourscheme from pywal
+(cat ~/.cache/wal/sequences &)
+
+# Run neofetch and print appointments on startup
 neofetch
+calcurse -Q
