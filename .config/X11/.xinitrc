@@ -20,7 +20,7 @@ xset r rate 250 70
 setxkbmap -option caps:escape,shift:both_capslock & 
 
 # Cleanup error file location
-ERRFILE="$XDG_CACHE_HOME/.config/X11/xsession-errors"
+ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 
 # loop bspwm
 # while true; do
