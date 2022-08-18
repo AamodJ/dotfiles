@@ -145,5 +145,8 @@ au!
 autocmd VimEnter * silent !echo -ne "\e[2 q"
 augroup END
 
+" For calcurse notes to be in markdown
+autocmd BufRead,BufNewFile /tmp/calcurse*,~/.config/calcurse/notes/* set filetype=markdown
+
 set hlsearch
 set statusline+=col:\ %c
