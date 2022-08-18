@@ -14,3 +14,7 @@ export GOPATH="$XDG_DATA_HOME"/go
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export ANDROID_HOME="$XDG_DATA_HOME"/android
 export CARGO_HOME="XDG_DATA_HOME"/cargo
+
+# Environment variables
+export VISUAL=vim
+export EDITOR=vim
