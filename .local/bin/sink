@@ -24,30 +24,35 @@ function toggle() {
 	fi
 }
 
-toggle
 case $1 in 
 up) 
 	if allow_inc
 	then
+		toggle
 		pactl set-sink-volume @DEFAULT_SINK@ +5%
 	fi 
 	;;
 down) 
+	toggle
 	pactl set-sink-volume @DEFAULT_SINK@ -5%
 	;;
 togglemute)
 	pactl set-sink-mute @DEFAULT_SINK@ toggle
 	;;
 set)
+	toggle
 	pactl set-sink-volume @DEFAULT_SINK@ 75%
 	;;
 speakers)
+	toggle
 	pactl set-default-sink alsa_output.pci-0000_02_00.3.builtin-speaker
 	;;
 fiiO)
+	toggle
 	pactl set-default-sink alsa_output.usb-FiiO_FiiO_BTR3K_ABCDEF0123456789-00.analog-stereo 
 	;;
 bluetooth)
+	toggle
 	pactl set-default-sink bluez_output.40_ED_98_1A_42_0F.a2dp-sink 
 	;;
 esac
