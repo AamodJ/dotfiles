@@ -23,13 +23,13 @@ super + q
         sink set
 
 # Switch pactl sinks
-ctrl + 1
+super + 1
         sink speakers
 
-ctrl + 2
+super + 2
         sink fiiO
 
-ctrl + 3
+super + 3
         sink bluetooth
 
 # terminal emulator
@@ -37,7 +37,7 @@ super + Return
 	kitty
 
 # program launcher
-super + space
+alt + space
     ~/.dotfiles/dm
 
 # make sxhkd reload its configuration files:
@@ -110,7 +110,7 @@ alt + bracket{left,right}
 alt + Tab
 	bspc node -f last
 
-super + Tab 
+ctrl + space 
 	bspc desktop -f last
 # alt + {grave,Tab}
 # 	bspc {node,desktop} -f last
@@ -122,7 +122,7 @@ alt + {o,i}
 	bspc wm -h on
 
 # focus or send to the given desktop
-super + {_,shift + }{1-9,0}
+ctrl + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
@@ -197,20 +197,27 @@ alt + v
 super + shift + {h,l}
         bspc node -m {prev,next}
 
+# Mount Phone
+super + o
+	simple-mtpfs --device 1 ~/Phone
+
+super + shift + o
+	fusermount -u ~/Phone
+
 # Unmount everything
 super + u
         umount -a
 
 # Open App
 super + c
-	chromium --force-dark-mode --enable-features=WebUIDarkMode
+	bspc desktop -f '^2' && firefox
 
 super + s 
-	spotify --force-device-scale-factor=1.75
+	bspc desktop -f '^3' && spotify --force-device-scale-factor=1.75
 
 # Fan control
 super + alt + f
-	 sudo fblast
+	sudo fblast
 
 super + alt + a
-	 sudo ablast
+	sudo ablast
