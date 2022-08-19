@@ -40,5 +40,9 @@ xsetroot -cursor_name left_ptr &
 
 pgrep bspswallow || bspswallow &
 
+# Convenience
+setxkbmap -option caps:escape,shift:both_capslock &
+xset r rate 250 70
+
 ~/.dotfiles/wmstuff
 dunst 

@@ -13,12 +13,6 @@ sudo brillo -S 0 -k
 # Set volume
 pactl set-sink-volume @DEFAULT_SINK@ 75%
 
-# Set keyboard input delay
-xset r rate 250 70
-
-# Bind caps to escape and make both shift press = caps
-setxkbmap -option caps:escape,shift:both_capslock & 
-
 # Cleanup error file location
 ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 
