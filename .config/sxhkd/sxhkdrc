@@ -36,6 +36,9 @@ super + 3
 super + Return
 	kitty
 
+alt + Return
+	tdrop -ma -w 2537 -y 41 -x 10 -n 0 kitty
+
 # program launcher
 alt + space
     ~/.dotfiles/dm
