@@ -89,6 +89,14 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
+cmd converth264 ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	clear; 
+	eval ffmpeg -i \"$fx\" -vcodec libx264 -crf 30 $HOME/Videos/output.mp4
+	notify-send "📋 File converted." "File converted to H.264 with crf 30"
+}}
+
 cmd setbg "$1"
 cmd bulkrename $vidir
 
@@ -99,7 +107,7 @@ map gh
 map g top
 map D delete
 map E extract
-map C copyto
+map C converth264
 map M moveto
 map <c-n> push :mkdir<space>
 map <c-r> reload
