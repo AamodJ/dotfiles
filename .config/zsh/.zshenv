@@ -18,3 +18,4 @@ export CARGO_HOME="XDG_DATA_HOME"/cargo
 # Environment variables
 export VISUAL=vim
 export EDITOR=vim
+export TERMINAL=kitty
