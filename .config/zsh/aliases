@@ -39,4 +39,4 @@ alias rmb="sudo vim /etc/mbpfan.conf && sudo systemctl restart mbpfan"
 alias wac="init-wacom"
 
 # Cleanup
-alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+alias wget="wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\""
