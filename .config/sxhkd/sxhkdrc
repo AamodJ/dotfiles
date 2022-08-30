@@ -1,184 +1,153 @@
-#
-# wm independent hotkeys
-#
+# ---------------------- Important hotkeys -----------------------------
 
-# take scrot
+## Open terminal
+super + Return
+	kitty
+
+## Open dmenu
+alt + space
+    ~/.dotfiles/dm
+
+## Lock screen
+super + BackSpace
+	betterlockscreen -l blur --off 5
+
+## Quit bspwm
+super + shift + {q,r}
+	bspc {quit,wm -r}
+
+## Reload sxkhd configs
+super + Escape
+	pkill -USR1 -x sxhkd
+
+## Screenshot
 Print
         scrot ~/Pictures/Screenshots/%Y-%m-%d-screenshot.png
 
 super + p
         scrot ~/Pictures/Screenshots/%Y-%m-%d-screenshot.png
 
-# volume
-XF86AudioRaiseVolume
-        sink up
+# ----------------------------- Audio ----------------------------------
 
-XF86AudioLowerVolume
-        sink down
-
-XF86AudioMute
-        sink togglemute
-
+# Set to 75%
 super + q
         sink set
 
-# Switch pactl sinks
+## Up
+XF86AudioRaiseVolume
+        sink up
+
+## Down
+XF86AudioLowerVolume
+        sink down
+
+## Mute
+XF86AudioMute
+        sink togglemute
+
+## Switch audio output -------------------------------------------------
+
+### Laptop speakers
 super + 1
         sink speakers
 
+### USB Dac 
 super + 2
         sink fiiO
 
+### Bluetooth
 super + 3
         sink bluetooth
 
-# terminal emulator
-super + Return
-	kitty
+# ---------------------------- Backlight -------------------------------
 
-alt + Return
-	tdrop -ma -w 2537 -y 41 -x 10 -n 0 kitty
+## Screen --------------------------------------------------------------
 
-# program launcher
-alt + space
-    ~/.dotfiles/dm
+### Set
+super + w
+	backlight setmon
 
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
-
-super + BackSpace
-	betterlockscreen -l blur --off 5
-
-#
-# bspwm hotkeys
-#
-
-# quit/restart bspwm
-super + shift + {q,r}
-	bspc {quit,wm -r}
-
-# close and kill
-alt + {_,shift + }q
-	bspc node -{c,k}
-
-# alternate between the tiled and monocle layout
-alt + m
-	bspc desktop -l next
-
-# send the newest marked node to the newest preselected node
-alt + y
-	bspc node newest.marked.local -n newest.!automatic.local
-
-# swap the current node and the biggest node
-alt + g
-	bspc node -s biggest
-
-alt + {Down, Up}
-    bspc desktop -f {prev, next}
-
-#
-# state/flags
-#
-
-# set the window state
-alt + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
-
-# set the node flags
-super + {m,x,y,z}
-	bspc node -g {marked,locked,sticky,private}
-
-#
-# focus/swap
-#
-
-# focus the node in the given direction
-super + {_,ctrl + }{h,j,k,l}
-	bspc node -{s,f} {west,south,north,east}
-
-# focus the node for the given path jump
-# alt + {p,b,comma,period}
-#	bspc node -f @{parent,brother,first,second}
-
-# focus the next/previous node in the current desktop
-# alt + {_,shift + }Tab
-# 	bspc node -f {next,prev}.local
-
-# focus the next/previous desktop in the current monitor
-alt + bracket{left,right}
-	bspc node @/ -R 180
-
-# focus the last node/desktop
-alt + Tab
-	bspc node -f last
-
-ctrl + space 
-	bspc desktop -f last
-# alt + {grave,Tab}
-# 	bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
-alt + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
-
-# focus or send to the given desktop
-ctrl + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
-
-#
-# preselect
-#
-
-# preselect the direction
-alt + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
-
-# preselect the ratio
-alt + ctrl + {1-9}
-	bspc node -o 0.{1-9}
-
-# cancel the preselection for the focused node
-alt + ctrl + space
-	bspc node -p cancel
-
-# cancel the preselection for the focused desktop
-alt + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-# Backlight
-## Screen
-super + r
-	backlight mondown
-
-XF86MonBrightnessDown
-	backlight mondown
-
+### Up
 super + t
 	backlight monup
 
 XF86MonBrightnessUp
 	backlight monup
 
-super + w
-	backlight setmon
+### Down
+super + r
+	backlight mondown
 
-## Keyboard 
+XF86MonBrightnessDown
+	backlight mondown
+
+## Keyboard ------------------------------------------------------------
+
+### Up
 super + g
 	backlight kbdup
 
 XF86KbdBrightnessUp 
 	backlight kbdup
 
+### Down
 super + f
 	backlight kbddown
 
 XF86KbdBrightnessDown
 	backlight kbddown
 
-# expand a window by moving one of its side outward
+# -------------------------- Desktop hotkeys ---------------------------
+
+## Focus settings ------------------------------------------------------
+
+### Focus or send to the given desktop
+ctrl + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+### Focus on previous desktop
+alt + Tab
+	bspc desktop -f last
+
+### Scroll through desktops
+alt + {Down, Up}
+    bspc desktop -f {prev, next}
+
+# -------------------------- Window hotkeys ----------------------------
+
+## Focus settings ------------------------------------------------------
+
+### focus the last used (can be on a different desktop)
+ctrl + space 
+	bspc node -f last
+
+### focus the node in the given direction
+ctrl + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+### Scroll through focus history 
+ctrl + bracket{left,right}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+## State settings ------------------------------------------------------
+
+### Set the window state
+alt + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+### Set the node flags
+super + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+## Sizing and moving ---------------------------------------------------
+
+### Move window to given direction
+ctrl + shift + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+### expand a window by moving one of its side outward
 alt + shift + {h,j,k,l}
 	bspc node -z {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
 
@@ -188,39 +157,112 @@ alt + Home
 alt + End
         bspc node -z bottom_right -20 -20
 
-# move a floating window
+### move a floating window
 alt + {h,j,k,l}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-# TeX mode
-alt + v
-        sh ~/.dotfiles/texmode.sh
+### focus the next/previous desktop in the current monitor
+alt + bracket{left,right}
+	bspc node @/ -R 180
 
-# Move to monitor
-super + shift + {h,l}
-        bspc node -m {prev,next}
+## close and kill
+alt + {_,shift + }q
+	bspc node -{c,k}
 
-# Mount Phone
+# -------------------------- Miscellaneous --------------------------- 
+
+## Persistent sessions with tdrop ------------------------------------
+
+### Terminal session
+alt + Return
+	tdrop -ma -w 2537 -y 41 -x 10 -n 0 kitty
+
+### lf session
+alt + shift + Return 
+	tdrop -ma -w 2537 -y 41 -x 10 -n 1 kitty
+
+### cpupower-gui session
+super + ctrl + c
+	tdrop -ma -w 2537 -y 41 -x 10 -n 2 cpupower-gui
+
+## Mounting related --------------------------------------------------
+
+### Mount Phone
 super + o
 	simple-mtpfs --device 1 ~/Phone
 
+### Unmount phone
 super + shift + o
 	fusermount -u ~/Phone
 
-# Unmount everything
+### Unmount everything
 super + u
         umount -a
 
-# Open App
+## Apps --------------------------------------------------------------
+
+### Firefox
 super + c
-	bspc desktop -f '^2' && firefox
+	bspc desktop -f '^1' && firefox
 
+### Spotify
 super + s 
-	bspc desktop -f '^3' && spotify --force-device-scale-factor=1.75
+	bspc desktop -f '^2' && spotify --force-device-scale-factor=1.75
 
-# Fan control
+## Fan control -------------------------------------------------------
+
+### Full blast
 super + alt + f
 	sudo fblast
 
+### Automatic 
 super + alt + a
 	sudo ablast
+
+## Preselect hotkeys ------------------------------------------------
+
+### Preselect the direction
+alt + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+### Preselect the ratio
+alt + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+### Cancel the preselection for the focused node
+alt + ctrl + space
+	bspc node -p cancel
+
+### Cancel the preselection for the focused desktop
+alt + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+## Send the newest marked node to the newest preselected node
+alt + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+## Alternate between the tiled and monocle layout
+alt + m
+	bspc desktop -l next
+
+# -------------------------- Unused ---------------------------
+
+## Move to monitor
+# super + shift + {h,l}
+#         bspc node -m {prev,next}
+
+## TeX mode
+# alt + v
+#         sh ~/.dotfiles/texmode.sh
+
+## Focus the node for the given path jump
+# alt + {p,b,comma,period}
+#	bspc node -f @{parent,brother,first,second}
+
+## Focus the next/previous node in the current desktop
+# alt + {_,shift + }Tab
+# 	bspc node -f {next,prev}.local
+
+## Swap the current node and the biggest node
+# alt + g
+# 	bspc node -s biggest
