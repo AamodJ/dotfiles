@@ -9,7 +9,7 @@ include-file = ~/.config/polybar/vars
 
 [bar/date]
 foreground = ${colors.fore}
-background      = #00000000
+background      = #BB0a1a25
 margin-top      = -1080
 width           =  300
 height          =  30
@@ -29,7 +29,7 @@ modules-left= date
 
 [bar/mpd]
 foreground = ${colors.fore}
-background      = #00000000
+background      = #BB0a1a25
 margin-top      = -1080
 width           =  600
 height          =  30
@@ -51,7 +51,7 @@ modules-left= spotify
 
 [bar/bluetooth]
 foreground = ${colors.fore}
-background      = #00000000
+background      = #BB0a1a25
 margin-top      = -1080
 width           =  300
 height          =  30
@@ -73,7 +73,7 @@ modules-left= bluetooth
 
 [bar/network]
 foreground = ${colors.fore}
-background      = #00000000
+background      = #BB0a1a25
 margin-top      = -1080
 width           =  300
 height          =  30
@@ -95,7 +95,7 @@ modules-left= eth
 
 [bar/cpu]
 foreground = ${colors.fore}
-background      = #00000000
+background      = #BB0a1a25
 margin-top      = -1080
 width           =  300
 height          =  30
