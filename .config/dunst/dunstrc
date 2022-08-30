@@ -184,5 +184,5 @@
 [urgency_critical]
     background = "#0a1a25EF"
     foreground = "#a9b1d6"
-    timeout = 6
-    icon = abrt
+	frame_color = "#e34f4f"
+	frame_width = 1
