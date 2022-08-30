@@ -34,6 +34,7 @@ alias pg="ping google.com"
 
 # Restart services
 alias rmb="sudo vim /etc/mbpfan.conf && sudo systemctl restart mbpfan"
+alias rd="killall dunst && dunst &"
 
 # Wacom 
 alias wac="init-wacom"
