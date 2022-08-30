@@ -3,5 +3,5 @@
 BATTINFO=`acpi -b`
 REMAINING=`expr $(acpi -b | cut -f 5 -d " " | cut -f 2 -d ":") - 0`
 if [[ `echo $BATTINFO | grep Discharging` && `echo $BATTINFO | cut -f 5 -d " "` < 00:15:00 ]] ; then
-    DISPLAY=:0.0 /usr/bin/notify-send "Battery Low" "Time remaining: $REMAINING min" --icon=/usr/share/pixmaps/low-battery.png
+    DISPLAY=:0.0 /usr/bin/dunstify "Battery Low" "Time remaining: $REMAINING min" --icon=/usr/share/pixmaps/low-battery.png --urgency=critical
 fi
