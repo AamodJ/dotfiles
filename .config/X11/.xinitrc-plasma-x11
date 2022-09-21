@@ -8,6 +8,7 @@ xrdb -merge ~/.config/X11/.Xresources &
 
 # Set brightness
 sudo brillo -S 15
+# sudo brillo -S 0 -k
 
 # Set volume
 pactl set-sink-volume @DEFAULT_SINK@ 75%
@@ -16,5 +17,6 @@ pactl set-sink-volume @DEFAULT_SINK@ 75%
 ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 
 source $HOME/.config/setup
-# open bspwm
-exec bspwm
+# start plasma
+export DESKTOP_SESSION=plasma
+exec startplasma-x11
