@@ -1,0 +1,12 @@
+configuration {
+  display-drun: "Applications:";
+  display-window: "Windows:";
+  drun-display-format: "{name}";
+  font: "JetBrainsMono Nerd Font Medium 10";
+  modi: "window,run,drun,emoji,calc";
+  show-icons: true;
+  icon-theme: "Papirus";
+  dpi: 1;
+}
+
+@theme "theme.rasi"

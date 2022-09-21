@@ -4,9 +4,9 @@
 super + Return
 	kitty
 
-## Open dmenu
+## Open rofi
 alt + space
-    ~/.dotfiles/dm
+    rofi -terminal kitty -show drun 
 
 ## Lock screen
 super + BackSpace
@@ -106,7 +106,7 @@ ctrl + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 ### Focus on previous desktop
-alt + Tab
+ctrl + space
 	bspc desktop -f last
 
 ### Scroll through desktops
@@ -118,7 +118,7 @@ alt + {Down, Up}
 ## Focus settings ------------------------------------------------------
 
 ### focus the last used (can be on a different desktop)
-ctrl + space 
+alt + Tab 
 	bspc node -f last
 
 ### focus the node in the given direction
@@ -170,6 +170,16 @@ alt + {_,shift + }q
 	bspc node -{c,k}
 
 # -------------------------- Miscellaneous --------------------------- 
+
+## Rofi hotkeys ------------------------------------------------------
+
+### Calculator 
+super + space
+	rofi -show calc -no-show-match -no-sort
+
+### Emojis
+super + e 
+	rofi -show emoji
 
 ## Persistent sessions with tdrop ------------------------------------
 
