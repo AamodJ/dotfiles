@@ -24,6 +24,8 @@ bspc config gapless_monocle         true
 bspc rule -a Zathura state=tiled layer=above
 bspc rule -a rofi state=floating center=on private=on layer=above
 
+xsetroot -cursor_name left_ptr &
+
 pgrep bspswallow || bspswallow &
 
 ~/.dotfiles/wmstuff
