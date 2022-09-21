@@ -1,5 +1,7 @@
 set nocompatible
 
+set backspace=indent eol
+
 " Clean up
 source $HOME/.config/vim/xdg.vim
 
