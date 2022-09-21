@@ -7,7 +7,6 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # Clean up 
 export VIMINIT="source $HOME/.config/vim/.vimrc" 
 export ZSHZ_DATA="$HOME/.config/z/.z" 
-export VLC="/Applications/VLC.app/Contents/MacOS/VLC"
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export GOPATH="$XDG_DATA_HOME"/go
