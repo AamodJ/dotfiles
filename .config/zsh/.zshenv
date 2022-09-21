@@ -14,6 +14,7 @@ export GOPATH="$XDG_DATA_HOME"/go
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export ANDROID_HOME="$XDG_DATA_HOME"/android
 export CARGO_HOME="XDG_DATA_HOME"/cargo
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
 # Environment variables
 export VISUAL=vim
