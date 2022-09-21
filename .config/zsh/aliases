@@ -21,6 +21,7 @@ alias cfsx="vim ~/.config/sxhkd/sxhkdrc"
 alias cfk="vim ~/.config/kitty/kitty.conf"
 alias cfs="vim ~/.config/sway/config"
 alias cfr="vim ~/.config/rofi/config.rasi"
+alias cfp="vim ~/.config/polybar/config.ini"
 
 # dotfiles alias
 alias gd="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
