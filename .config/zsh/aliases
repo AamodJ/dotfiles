@@ -17,9 +17,11 @@ alias cflfs="vim ~/.config/lf/scope"
 alias cfb="vim ~/.config/bspwm/bspwmrc"
 alias cfsx="vim ~/.config/sxhkd/sxhkdrc"
 alias cfk="vim ~/.config/kitty/kitty.conf"
+alias cfs="vim ~/.config/sway/config"
+alias cfr="vim ~/.config/rofi/config.rasi"
 
 # dotfiles alias
-alias gitdot="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+alias gd="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
 # Convenience
 alias zat="zathura"
