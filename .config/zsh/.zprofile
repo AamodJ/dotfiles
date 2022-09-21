@@ -19,7 +19,7 @@ case $WM in
 	;;
 "3")
 	export DESKTOP_SESSION=plasma
-	. $HOME/.config/X11/.xinitrc-plasma-wayland
+	. $HOME/.config/wayland/plasma-wayland
 	;;
 "4")
 	export DESKTOP_SESSION=plasma
