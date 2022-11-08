@@ -1,0 +1,18 @@
+swaylock \
+	--clock \
+	--indicator \
+	--screenshots \
+	--text-color C6A0F6 \
+	--inside-color 1B1D2B \
+	\
+	--effect-blur 5x5 \
+	\
+	--ring-color 24273A \
+	--line-color 1B1D2B \
+	--key-hl-color C6A0F6 \
+	--bs-hl-color ED8796 \
+	--separator-color 24273A \
+	\
+	--inside-ver-color 8AADf4 \
+	--inside-wrong-color ED8796 \
+	--fade-in 0.2

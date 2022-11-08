@@ -1,0 +1,24 @@
+#!/bin/sh
+
+LOGFILE="$HOME/.local/share/logs/setbg.log"
+
+rm -f ~/.local/share/bg.jpg
+echo "Removed previous symlink" > "$LOGFILE"
+
+if $(ln -sf $1 ~/.local/share/bg.jpg); then
+	echo "Successfully created new symbolic link" >> "$LOGFILE"
+
+	echo "Killing hyprpaper" >> "$LOGFILE"
+	echo $(killall hyprpaper) >> "$LOGFILE"
+
+	if [[ $(hyprctl dispatch exec hyprpaper) == "ok" ]]; then
+		echo "Wallpaper updated" >> "$LOGFILE"
+		notify-send "Wallpaper updated" "Your wallpaper should be changed now..." --icon /usr/share/pixmaps/archlinux-logo.svg
+	else
+		echo $(hyprctl dispatch exec hyprpaper) >> "$LOGFILE"
+	fi
+
+else 
+	echo "Failed to create symlink. This really should not have happened so try manually creating symbolic link." >> "$LOGFILE"
+	notify-send "Failed to create symbolic link" "You dun goofed. This error shouldn't be thrown idiot" --icon /usr/share/pixmaps/archlinux-logo.svg
+fi

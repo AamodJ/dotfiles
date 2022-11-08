@@ -1,0 +1,11 @@
+#! /bin/sh
+
+chosen=$(printf "  Power Off\n  Restart\n Sleep\n  Lock" | rofi -dmenu -i -theme-str '@import "power.rasi"')
+
+case "$chosen" in
+	"  Power Off") poweroff ;;
+	"  Restart") reboot ;;
+	" Sleep") systemctl suspend ;;
+	"  Lock") betterlockscreen -l blur --off 5 ;;
+	*) exit 1 ;;
+esac

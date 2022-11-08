@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Configuration
+cache_file=/home/aamod/.cache/my_cache/.updates
+
+# function to check updates, must work without root privileges and print
+# the number of updates to stdout.
+function update_count {
+  checkupdates | wc -l; return $?
+}
+
+# notification function, called: notify TOTAL [NEW]
+function notify {
+  if [ $# -eq 2 ]; then
+    notify-send "$2 new updates ($1 total)" "Run pacman -Syu to upgrade" --icon=/usr/share/pixmaps/archlinux-logo.svg
+  else
+    notify-send "$1 updates" "Run pacman -Syu to upgrade" --icon=/usr/share/pixmaps/archlinux-logo.svg
+  fi
+}
+
+count=$(update_count)
+
+if [ -f "$cache_file" ] && [ $(<$cache_file) -ge 0 ]; then
+  last_count=$(cat $cache_file)
+
+  if [ $last_count -lt $count ]; then
+    notify $count $((count-last_count))
+    echo $count > $cache_file
+  fi
+fi
+if [ $count -ge 0 ]; then
+  notify $count
+  echo $count > $cache_file
+fi

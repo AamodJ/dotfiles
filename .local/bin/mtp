@@ -1,0 +1,47 @@
+#/bin/sh 
+
+# chosen=$(simple-mtpfs -l | grep -Po "[^\d:\s][\w\s|\w/]*(\(.*\))" | rofi -dmenu -i -theme-str '@import "power.rasi"')
+
+function mountid () {
+	if $(simple-mtpfs --device $1 $HOME/Phone); then
+		dunstify "✔ Mounting successful" "Mounted device to ~/Phone"
+		update_cache mounted
+	else
+		dunstify "❌ Mounting unsuccessful" "Failed to mount device to ~/Phone. Please check if FTP is enabled"
+	fi
+}
+
+function unmountit () {
+	if [[ $(check_cache) = 'occupied' ]]; then
+		fusermount -u $HOME/Phone
+		dunstify "✔ Unmounting successful" "You can remove your device"
+		update_cache unmounted
+	elif [[ $(check_cache) = 'unoccupied' ]]; then
+		dunstify "❌ Unmounting unsuccessful" "No device to unmount"
+	fi
+}
+
+function update_cache () {
+	if [[ $1 = 'mounted' ]]; then
+		echo 1 > $XDG_CACHE_HOME/miscellaneous/mount-state
+	elif [[ $1 = 'unmounted' ]]; then 
+		echo 0 > $XDG_CACHE_HOME/miscellaneous/mount-state
+	else
+		echo "Wrong argument \"$1\"" > $XDG_CACHE_HOME/miscellaneous/mount-state
+	fi
+}
+
+function check_cache () {
+	if [[ $(cat $XDG_CACHE_HOME/miscellaneous/mount-state) = '1' ]]; then 
+		echo "occupied"
+	elif [[ $(cat $XDG_CACHE_HOME/miscellaneous/mount-state) = '0' ]]; then
+		echo "unoccupied"
+	fi 
+}
+
+if [[ $1 = 'mount' ]] ; then
+	deviceid=$(simple-mtpfs -l | rofi -dmenu -i -theme-str '@import "power.rasi"' | grep -Po "\d")
+	mountid $deviceid
+elif [[ $1 = 'unmount' ]]; then
+	unmountit
+fi 

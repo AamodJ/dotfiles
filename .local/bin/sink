@@ -53,7 +53,7 @@ fiiO)
 	;;
 bluetooth)
 	toggle
-	pactl set-default-sink bluez_output.40_ED_98_1A_42_0F.a2dp-sink 
+	pactl set-default-sink bluez_output.40_ED_98_1A_42_0F.1
 	;;
 esac
 
