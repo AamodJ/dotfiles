@@ -22,42 +22,42 @@ super + Escape
 
 ## Screenshot
 Print
-        scrot ~/Pictures/Screenshots/%Y-%m-%d-screenshot.png
+    scrot ~/Pictures/Screenshots/%Y-%m-%d-screenshot.png
 
 super + p
-        scrot ~/Pictures/Screenshots/%Y-%m-%d-screenshot.png
+    scrot ~/Pictures/Screenshots/%Y-%m-%d-screenshot.png
 
 # ----------------------------- Audio ----------------------------------
 
 # Set to 75%
 super + q
-        sink set
+    sink set
 
 ## Up
 XF86AudioRaiseVolume
-        sink up
+    sink up
 
 ## Down
 XF86AudioLowerVolume
-        sink down
+    sink down
 
 ## Mute
 XF86AudioMute
-        sink togglemute
+    sink togglemute
 
 ## Switch audio output -------------------------------------------------
 
 ### Laptop speakers
 super + 1
-        sink speakers
+    sink speakers
 
 ### USB Dac 
 super + 2
-        sink fiiO
+    sink fiiO
 
 ### Bluetooth
 super + 3
-        sink bluetooth
+    sink bluetooth
 
 # ---------------------------- Backlight -------------------------------
 
@@ -152,10 +152,10 @@ alt + shift + {h,j,k,l}
 	bspc node -z {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
 
 alt + Home
-        bspc node -z bottom_right +20 +20
+    bspc node -z bottom_right +20 +20
 
 alt + End
-        bspc node -z bottom_right -20 -20
+    bspc node -z bottom_right -20 -20
 
 ### move a floating window
 alt + {h,j,k,l}
@@ -173,6 +173,10 @@ alt + {_,shift + }q
 
 ## Rofi hotkeys ------------------------------------------------------
 
+### Run
+super + alt + m
+	rofi -show run
+
 ### Calculator 
 super + space
 	rofi -show calc -no-show-match -no-sort
@@ -180,6 +184,10 @@ super + space
 ### Emojis
 super + e 
 	rofi -show emoji
+
+### File browser
+super + shift + m
+	rofi -show file-browser-extended
 
 ## Persistent sessions with tdrop ------------------------------------
 
@@ -207,7 +215,7 @@ super + shift + o
 
 ### Unmount everything
 super + u
-        umount -a
+    umount -a
 
 ## Apps --------------------------------------------------------------
 
