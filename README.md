@@ -1,3 +1,4 @@
+### Outdated README. Gotta update it
 # dotfiles
 This repo is to maintain my dotfiles for my current arch config. Here you will find the configs for the following:
 1. bspwm 
