@@ -45,7 +45,11 @@ set)
 	;;
 speakers)
 	toggle
-	pactl set-default-sink alsa_output.pci-0000_02_00.3.builtin-speaker
+	pactl set-default-sink alsa_output.pci-0000_02_00.3.Speakers
+	;;
+headphones)
+	toggle
+	pactl set-default-sink alsa_output.pci-0000_02_00.3.Headphones
 	;;
 fiiO)
 	toggle
