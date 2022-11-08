@@ -57,9 +57,6 @@ bindkey -s '^o' 'lfcd\n'
 bindkey -s '^r' 'resource\n'
 bindkey -s '^y' 'sensors | grep Core\n'
 
-# Import colourscheme from pywal
-(cat ~/.cache/wal/sequences &)
-
 # Run neofetch and print appointments on startup
 neofetch
 calcurse -Q

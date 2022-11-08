@@ -1,0 +1,15 @@
+#/bin/sh
+
+export MOZ_ENABLE_WAYLAND=1
+
+sudo brillo -S 15 -u 150000
+
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+# Use Network Manager to handle all networking 
+nmcli networking on
+
+volnoti -t 1 &
+swaync &
+waybar &
+hyprpaper &

@@ -1,0 +1,119 @@
+{
+  "position": "top",
+  "layer": "top",
+  "height": 51,
+  "modules-left": [
+    "wlr/workspaces"
+  ],
+  "modules-center": [
+    "custom/notification",
+    "tray",
+	"custom/bat0",
+    "network",
+    "pulseaudio",
+    "custom/date",
+    "clock",
+	"custom/powermenu"
+  ],
+  "modules-right": [
+    "custom/media"
+  ],
+  "wlr/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六",
+      "7": "七",
+      "8": "八",
+      "9": "九",
+      "10": "〇",
+      "default": "一",
+      "active": "●"
+    }
+  },
+  "hyprland/window": {
+    "max-length": 30
+  },
+  "tray": {
+    "icon-size": 13,
+    "spacing": 10
+  },
+  "custom/media": {
+    "format": "{icon} {}",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": " ",
+      "default": " "
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/scroll_spotify_status.sh"
+  },
+  "custom/powermenu": {
+	"tooltip": false,
+    "format": " ",
+	"on-click": "wlogout",
+	"on-click-middle": "hyprctl dispatch exit 0",
+	"on-click-right": "lockscreen",
+  },
+  "custom/date": {
+    "format": "   {}",
+    "interval": 3600,
+    "exec": "$HOME/.config/waybar/waybar-date.sh"
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": " <span foreground='red'><sup></sup></span>",
+      "none": " ",
+      "dnd-notification": " <span foreground='red'><sup></sup></span>",
+      "dnd-none": " "
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "clock": {
+    "format": "  {:%I:%M %p} ",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "custom/bat0": {
+    "exec": "python $HOME/.config/waybar/battery.py BAT0",
+    "return-type": "json",
+    "format": "{icon}   {}",
+    "format-icons": ["", "", "", ""],
+    "tooltip": false
+   },
+  "network": {
+    "format-wifi": "   {essid}",
+    "format-ethernet": "  Wired",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "󰤮 Disconnected",
+    "tooltip-format-wifi": "Signal Strenght: {signalStrength}% | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}"
+  },
+  "pulseaudio": {
+    "format": "{icon}   {volume}%",
+    "format-muted": "ﱝ Muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+	"on-click": "sink up",
+	"on-click-right": "sink down"
+  }
+}
