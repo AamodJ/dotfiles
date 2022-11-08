@@ -5,20 +5,29 @@ set backspace=indent eol
 " Clean up
 source $HOME/.config/vim/xdg.vim
 
-call vundle#begin()
+" ---------------- Brief help -----------------
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
 
-" let Vundle manage Vundle, required
-" Plugin 'VundleVim/Vundle.vim'
+" ---------------- Begin Vundle ----------------
+
+call vundle#begin() 
+
+" Colorscheme 
+Plugin 'itchyny/lightline.vim'
+Plugin 'catppuccin/vim', { 'as': 'catppuccin' }
 
 Plugin 'sirver/ultisnips'
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<tab>'
     let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
-" If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" titlecase plugin. Press gz<text object> to titlecase it
 Plugin 'christoomey/vim-titlecase'
 
 Plugin 'lervag/vimtex'
@@ -41,72 +50,31 @@ syntax on
 filetype on
 au BufNewFile,BufRead *.tikz set filetype=tex
 
-" one half theme
-Plugin 'sonph/onehalf', { 'rtp': 'vim' }
-
-" vim-grammarous
 Plugin 'rhysd/vim-grammarous'
 
-" NERD Tree
 Plugin 'scrooloose/nerdtree'
 
-" autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 map <C-n> :NERDTreeToggle<CR>
 
-" vim-surround
 Plugin 'tpope/vim-surround'
-
-" airline plugin
-Plugin 'vim-airline/vim-airline'"
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
 
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
+call vundle#end()
+filetype plugin indent on
+
 set t_Co=256
 set cursorline
 
-" Colorscheme
-Plugin 'ghifarit53/tokyonight-vim'
+" Set Colorscheme
 set termguicolors
+source $HOME/.config/vim/themes/current-theme.vim
 
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-let g:tokyonight_transparent = 1
-
-colorscheme tokyonight
-
-" Lightline
-let g:lightline = {
-    \ 'colorscheme': 'tokyonight',
-    \ 'active': {
-    \   'left': [ ['mode', 'paste'],
-    \             ['readonly', 'filename','kite', 'modified'] ]
-    \ },
-    \ 'component_function': {
-    \   'kite': 'kite#statusline'
-    \ }
-    \ }
-set laststatus=2
-
-" colorscheme onehalfdark
-" let g:airline_theme='onehalfdark'
-
-" fzf_action, Customizable extra key bindings for opening selected files in different ways
+" fzf_action
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
@@ -120,12 +88,14 @@ hi! LineNr ctermbg=NONE ctermfg=NONE
 " Basic stuff
 set number relativenumber
 set tabstop=4
+
 " Makes vim paste properly in insert mode
 se paste noai
 
 " Enable Auto-complete
 set wildmode=longest,list,full
 
+" Mappings
 map <space>c :w !pdflatex % <return> 
 map <space>v :!zathura --mode fullscreen %:r.pdf <return>
 map <space>m :e 

@@ -11,6 +11,7 @@ sudo brillo -S 15
 pactl set-sink-volume @DEFAULT_SINK@ 75%
 
 source $HOME/.config/setup
+export MOZ_ENABLE_WAYLAND=1
 # start plasma
 export DESKTOP_SESSION=plasma
 exec startplasma-wayland
