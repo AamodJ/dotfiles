@@ -1,0 +1,35 @@
+#!/bin/bash
+# 4005d --> 4005e
+
+LOGFILE=/home/aamod/.local/share/logs/proc.log
+
+echo "Flushing previous logs at $(date)" > $LOGFILE
+echo "BEGIN procoff" >> $LOGFILE
+
+# Run the script with turbo off on
+if $(x86_energy_perf_policy --turbo-enable 0); then
+	echo "Turbo boost disabled" >> $LOGFILE
+
+	modprobe msr
+
+	# sudo touch temp
+	r=`sudo rdmsr 0x1FC`
+	#echo $r > temp
+	s='0x'$r'' 
+	f=$(($s&0xFFFFE))
+	wrmsr 0x1FC "obase=16;$f"|bc
+
+	echo "$r"" write to ""reg 0x1FC" >> $LOGFILE
+	echo "BD PROCHOT off." >> $LOGFILE
+
+	if [[ "$1" == "notify" ]]; then
+		sudo rotify --icon=/usr/share/pixmaps/archlinux-logo.svg "Turbo boost disabled" "BD PROCHOT off"
+	fi
+else
+	echo "Turbo boost disable failed" >> $LOGFILE
+	if [[ "$1" == "notify" ]]; then
+		sudo rotify --icon=/usr/share/pixmaps/archlinux-logo.svg  "Turbo boost disable failed" "Check proc.log for logs"
+	fi
+fi
+
+echo "END procoff" >> $LOGFILE

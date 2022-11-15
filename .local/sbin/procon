@@ -1,0 +1,24 @@
+#!/bin/bash
+#  
+
+LOGFILE=/home/aamod/.local/share/logs/proc.log
+
+echo "BEGIN procon at $(date)" >> $LOGFILE
+
+# Run the script with turbo on 
+if $(sudo modprobe msr && sudo wrmsr 0x1FC 4005d); then
+	echo "BD PROCHOT on" >> $LOGFILE
+
+	x86_energy_perf_policy --turbo-enable 1
+	echo "Turbo boost on" >> $LOGFILE
+	if [[ "$1" == "notify" ]]; then
+		sudo rotify --icon=/usr/share/pixmaps/archlinux-logo.svg "Turbo boost enabled" "BD PROCHOT turned on"
+	fi
+else
+	echo "Failed to turn BD PROCHOT on. Turbo boost enable aborted"
+	if [[ "$1" == "notify" ]]; then
+		sudo rotify --icon=/usr/share/pixmaps/archlinux-logo.svg "Turbo boost enable aborted" "Failed to turn on BD PROCHOT. Skipping turbo boost enable to protect CPU"
+	fi
+fi
+
+echo "END procon" >> $LOGFILE
