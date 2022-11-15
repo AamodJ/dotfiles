@@ -1,5 +1,5 @@
 # Persistent PATH variable
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/bin/:$HOME/.local/sbin/"
 export PATH="$PATH:$HOME/.local/share/applications/Write/"
 
 echo "BSPWM (1), Hyprland (2), KDE-Wayland (3), KDE-X11 (4), tty (5)?"
