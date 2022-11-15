@@ -9,6 +9,12 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # Use Network Manager to handle all networking 
 nmcli networking on
 
+# Swayidle 
+swayidle -w timeout 300 'lockscreen' &
+
+# Turn off turbo boost and BD PROCHOT
+sudo procoff
+
 volnoti -t 1 &
 swaync &
 waybar &
