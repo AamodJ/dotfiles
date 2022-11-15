@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# This script is a way to send notifications for scripts running as root
+
+function notify() {
+    #Detect the name of the display in use
+    local display=$DISPLAY
+
+    #Detect the user using such display
+    local user=$(who | awk '{print $1}' | head -n 1)
+
+    #Detect the id of the user
+    local uid=$(id -u $user)
+
+    sudo -u $user DISPLAY=$display DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send "$@"
+}
+
+notify "$@"
