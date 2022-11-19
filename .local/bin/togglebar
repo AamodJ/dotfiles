@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if ! $(killall waybar); then
+	hyprctl dispatch exec waybar
+fi
