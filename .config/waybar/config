@@ -8,6 +8,7 @@
   "modules-center": [
     "custom/notification",
     "tray",
+	"custom/rpm",
 	"custom/bat0",
     "network",
     "pulseaudio",
@@ -92,6 +93,12 @@
     "return-type": "json",
     "format": "{icon}   {}",
     "format-icons": ["", "", "", ""],
+    "tooltip": false
+   },
+  "custom/rpm": {
+    "exec": "cat $HOME/.cache/my_cache/rpm",
+    "format": "   {}",
+	"interval": 2,
     "tooltip": false
    },
   "network": {

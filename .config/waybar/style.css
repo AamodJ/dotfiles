@@ -53,6 +53,7 @@ tooltip {
 #custom-powermenu,
 #clock,
 #custom-bat0,
+#custom-rpm,
 #pulseaudio,
 #network,
 #workspaces,
@@ -100,6 +101,10 @@ tooltip {
 #custom-bat0.charging,
 #custom-bat1.charging {
     color: #9BC89D;
+}
+
+#custom-rpm {
+  color: #D7FEC0;
 }
 
 #network {
