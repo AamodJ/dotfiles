@@ -23,9 +23,9 @@ set scrolloff 10
 set icons
 set period 1
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
-set cleaner '~/.config/lf/cleaner'
-set previewer '~/.config/lf/scope'
-map i $~/.config/lf/scope $f | less -R
+set cleaner '$XDG_CONFIG_HOME/lf/cleaner'
+set previewer '$XDG_CONFIG_HOME/lf/scope'
+map i $$XDG_CONFIG_HOME/lf/scope $f | less -R
 set drawbox true
 set ignorecase true
 
@@ -35,7 +35,7 @@ cmd open ${{
 	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) sc-im $fx ;;
 	application/vnd.openxmlformats-officedocument.wordprocessingml.document) open $f ;;
 	image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) zathura $fx >/dev/null 2>&1 ;;
-    text/*|application/json|inode/x-empty) vim $fx;;
+    text/*|application/json|inode/x-empty) $VISUAL $fx;;
 	image/x-xcf) gimp $f >/dev/null 2>&1 ;;
 	image/svg+xml) display -- $f ;;
 	image/*) nsxiv $f >/dev/null 2>&1;;
@@ -43,6 +43,7 @@ cmd open ${{
 	video/*) mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd*|application/epub*) zathura $fx >/dev/null 2>&1 ;;
 	application/pgp-encrypted) $EDITOR $fx ;;
+	application/gzip) tar xzvf $fx ;;
     *) for f in $fx; do $OPENER $f >/dev/null 2>&1; done;;
     esac
 }}
@@ -67,34 +68,12 @@ cmd delete ${{
 	[ $ans = "y" ] && rm -rf -- $fx
 }}
 
-cmd moveto ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	clear; echo "Move to where?"
-	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
-	for x in $fx; do
-		eval mv -iv \"$x\" \"$dest\"
-	done &&
-	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
-}}
-
-cmd copyto ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	clear; echo "Copy to where?"
-	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
-	for x in $fx; do
-		eval cp -ivr \"$x\" \"$dest\"
-	done &&
-	notify-send "📋 File(s) copied." "File(s) copies to $dest."
-}}
-
 cmd converth264 ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
 	clear; 
 	eval ffmpeg -i \"$fx\" -vcodec libx264 -crf 30 $HOME/Videos/output.mp4
-	notify-send "📋 File converted." "File converted to H.264 with crf 30"
+	notify-send "File converted." "File converted to H.264 with crf 30" --icon=$XDG_DATA_HOME/pixmaps/file-video-solid-white.png
 }}
 
 cmd setbg "$1"
@@ -111,7 +90,6 @@ map C converth264
 map M moveto
 map <c-n> push :mkdir<space>
 map <c-r> reload
-map <c-s> set hidden!
 map <enter> shell
 map x $$f
 map X !$f
@@ -129,7 +107,7 @@ map . set hidden!
 
 map <c-e> down
 map <c-y> up
-map V push :!vim<space>
+map V push :!$VISUAL<space>
 
 map W $setsid -f $TERMINAL >/dev/null 2>&1
 

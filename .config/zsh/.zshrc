@@ -1,5 +1,5 @@
 # Plugins
-source ~/.config/zsh/zsh-z.plugin.zsh
+source $XDG_CONFIG_HOME/zsh/zsh-z.plugin.zsh
 
 # Functions
 # Use lf to switch directories and bind it to ctrl-o
@@ -32,7 +32,7 @@ zle -N zle-line-init
 bindkey -v
 
 # Some export options
-export HISTFILE="$HOME/.config/zsh/.zsh_history"
+export HISTFILE="$XDG_CONFIG_HOME/zsh/.zsh_history"
 export HISTSIZE=1000
 export SAVEHIST=1000
 
@@ -44,13 +44,10 @@ prompt spaceship
 export FZF_DEFAULT_OPTS="--multi --height=40% --preview='cat {}' --preview-window=right:60%:wrap"
 
 # Sourcing files
-source ~/.config/zsh/aliases
-source ~/.config/lf/icons
+source $XDG_CONFIG_HOME/zsh/aliases
+source $XDG_CONFIG_HOME/lf/icons
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Some options
-unsetopt BG_NICE # Makes it so that alacritty doesn't give a random prompt whenever running commands 
 
 # Keybinds
 bindkey -s '^o' 'lfcd\n'

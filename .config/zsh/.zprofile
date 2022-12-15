@@ -8,22 +8,22 @@ read WM
 case $WM in
 "1")
 	export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
-	exec startx $HOME/.config/X11/.xinitrc
+	exec startx $XDG_CONFIG_HOME/X11/.xinitrc
 	;;
 
 "2")
 	unset XAUTHORITY
-	. $HOME/.config/wayland/wrapperhl
+	. $XDG_CONFIG_HOME/wayland/wrapperhl
 	;;
 "3")
 	unset XAUTHORITY
 	export DESKTOP_SESSION=plasma
-	. $HOME/.config/wayland/plasma-wayland
+	. $XDG_CONFIG_HOME/wayland/plasma-wayland
 	;;
 "4")
 	export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 	export DESKTOP_SESSION=plasma
-	exec startx $HOME/.config/X11/.xinitrc-plasma-x11
+	exec startx $XDG_CONFIG_HOME/X11/.xinitrc-plasma-x11
 	;;
 "5")
 	;;
