@@ -221,7 +221,7 @@ super + u
 
 ### Firefox
 super + c
-	bspc desktop -f '^1' && firefox
+	bspc desktop -f '^1' && MOZ_USE_XINPUT2=1 firefox
 
 ### Spotify
 super + s 
