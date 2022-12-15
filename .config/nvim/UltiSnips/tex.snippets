@@ -24,7 +24,7 @@ snippet template "Basic template" b
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{amsmath, amssymb}
-\input{$HOME/.config/latex/preamble}
+\input{$XDG_CONFIG_HOME/latex/preamble}
 
 % figure support
 \usepackage{import}
@@ -46,7 +46,7 @@ endsnippet
 
 snippet doc "Article Document"
 \documentclass{$1}
-\usepackage{$HOME/.config/latex/preamble}
+\usepackage{$XDG_CONFIG_HOME/latex/preamble}
 
 \title{$2}
 \author{Aamod Abhay Joshi}
@@ -55,7 +55,7 @@ $0
 endsnippet
 
 snippet preamble "Preamble"
-\input{$HOME/.config/latex/preamble}
+\input{$XDG_CONFIG_HOME/latex/preamble}
 endsnippet
 
 snippet beg "begin{} / end{}" bA
