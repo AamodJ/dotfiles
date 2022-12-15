@@ -2,9 +2,10 @@
 
 export MOZ_ENABLE_WAYLAND=1
 
-sudo brillo -S 15 -u 150000
-
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+sudo brillo -S 15 -u 150000
 
 # Use Network Manager to handle all networking 
 nmcli networking on
@@ -14,6 +15,8 @@ swayidle -w timeout 300 'lockscreen' &
 
 # Turn off turbo boost and BD PROCHOT
 sudo procoff
+
+jamesdsp &
 
 volnoti -t 1 &
 swaync &
