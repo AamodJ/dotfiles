@@ -23,7 +23,10 @@ echo "Git configured"
 cd dotfiles 
 
 echo "Installing dependencies"
-yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi rofi-calc rofi-emoji gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf mbpfan spaceship-prompt-git picom-ibhagwan-git zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie wireguard-tools msr-tools xf86-input-synaptics gimp libreoffice-still nautilus adb scrcpy compsize ani-cli texlive-core texlive-bin texlive-latexextra texlive-bibtexextra xf86-input-wacom brillo volnoti xdg-ninja tdrop-git
+yay -S --noconfirm bspwm sxhkd polybar kitty dunst neofetch lf rclone rofi rofi-calc rofi-emoji gotop nsxiv pandoc-bin vundle bat feh obs-studio pipewire-pulse udisks2 simple-mtpfs zathura zathura-djvu zathura-pdf-mupdf spaceship-prompt-git picom-ibhagwan-git zsh-syntax-highlighting fzf man cpupower-gui scrot firefox betterlockscreen pipewire-jack pipewire-alsa qjackctl autocutsel cronie wireguard-tools msr-tools xf86-input-synaptics gimp libreoffice-still nautilus adb scrcpy compsize ani-cli texlive-core texlive-bin texlive-latexextra texlive-bibtexextra xf86-input-wacom brillo volnoti xdg-ninja tdrop-git spicetify-cli colorpicker jamesdsp upscayl-bin wshowkeys-git x86_energy_perf_policy betterdiscord-installer-bin sc-im
+
+echo "Installing wayland related packages"
+yay -S --noconfirm hyprland waybar-hyprland-git hyprpicker-git hyprpaper-git swaync wlogout slurp grim xorg-xwayland-hidpi-xprop catppuccin-gtk-theme-macchiato playerctl qt6-wayland swaylock-effects-git swayidle zscroll-git
 
 echo "Copying configs"
 cp -r .config/* ~/.config/
@@ -31,12 +34,9 @@ mkdir ~/.dotfiles
 cp -r .dotfiles/* ~/.dotfiles
 mkdir -p ~/.local
 cp -r .local/* ~/.local/
-cp .Xresources ~/.Xresources
-cp .xinitrc ~/.xinitrc 
-cp .zprofile ~/.zprofile 
-cp .zshenv ~/.zshenv
+chown root ~/.local/sbin/
+chown root ~/.local/sbin/*
 mkdir ~/.config/z
-touch ~/.config/z/.z
 sudo cp ~/.config/trackpad/70-synaptics.conf /etc/X11/xorg.conf.d/
 echo "Fixing ani-cli"
 sudo cp ~/.config/ani-cli-fix/* /usr/bin/
@@ -48,7 +48,7 @@ mkdir ~/Pictures/Screenshots
 echo "Configured!"
 sleep 3
 
-# Remove this part if you wish to use another system backup tool (eg. snapper)
+# Remove this part if you wish to use another system backup tool (like snapper)
 echo "Installing timeshift"
 cd ~/git-clones
 git clone https://aur.archlinux.org/timeshift.git
@@ -58,12 +58,13 @@ echo "Timeshift installed!"
 cd .. 
 rm -rf timeshift
 
-# 2018 Macbook Pro specific things. Remove if irrelavent for your machine
+# 2018 Macbook Pro specific things. Remove if irrelavent for your device
 echo "Fixing audio"
-sudo cp ~/.config/audio/AppleT2.conf /usr/share/alsa/cards/AppleT2.conf
-sudo cp ~/.config/audio/apple-t2.conf /usr/share/alsa-card-profile/mixer/profile-sets/apple-t2.conf
-sudo cp ~/.config/audio/91-pulseaudio-custom.rules /usr/lib/udev/rules.d/91-pulseaudio-custom.rules
-echo "Audio fixed!"
+sudo git clone https://github.com/kekrby/t2-better-audio.git /tmp/t2-better-audio
+cd /tmp/t2-better-audio
+./install.sh
+sudo rm -r /tmp/t2-better-audio
+cd ~/git-clones
 sleep 3
 echo "Fixing fan"
 git clone https://github.com/networkException/mbpfan
