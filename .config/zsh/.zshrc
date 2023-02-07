@@ -55,5 +55,4 @@ bindkey -s '^r' 'resource\n'
 bindkey -s '^y' 'sensors | grep Core\n'
 
 # Run neofetch and print appointments on startup
-neofetch
-calcurse -Q
+pfetch

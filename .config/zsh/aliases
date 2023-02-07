@@ -18,6 +18,7 @@ alias cfw="$EDITOR $XDG_CONFIG_HOME/waybar/config"
 alias cfws="$EDITOR $XDG_CONFIG_HOME/waybar/style.css"
 alias cfr="$EDITOR $XDG_CONFIG_HOME/rofi/config.rasi"
 alias cfp="$EDITOR $XDG_CONFIG_HOME/polybar/config.ini"
+alias cfpf="$EDITOR $XDG_CONFIG_HOME/pfetch/config"
 
 # Startup scripts
 alias cfx="$EDITOR $XDG_CONFIG_HOME/X11/.xinitrc"

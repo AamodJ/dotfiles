@@ -13,6 +13,9 @@ export ANDROID_HOME="$XDG_DATA_HOME"/android
 export CARGO_HOME="XDG_DATA_HOME"/cargo
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
+# pfetch variables
+export PF_SOURCE="$XDG_CONFIG_HOME/pfetch/config"
+
 # Environment variables
 export VISUAL=nvim
 export EDITOR=nvim
