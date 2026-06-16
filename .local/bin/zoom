@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ "$XDG_CURRENT_DESKTOP" = "mango" ]; then 
+    MON=$(mmsg get focusing-client | jq -r '.monitor')
+    SCALE=$(mmsg get monitor "$MON" | jq -r '.scale')
+# elif [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then 
+#     grim - | wayland-boomer -ms 2
+fi
+
+grim -o "$MON" - | wayland-boomer -ms "$SCALE"

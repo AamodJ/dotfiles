@@ -1,0 +1,23 @@
+#!/bin/bash
+
+FILENAME=$(xdg-user-dir PICTURES)/screenshots/$(date +'%Y%m%d%H%M%S.png')
+
+if [ "$1" = "region" ]; then 
+	if [ "$XDG_SESSION_TYPE" = "wayland" ]; then 
+		slurp | grim -g - "$FILENAME"
+		wl-copy < "$FILENAME"
+	elif [ "$XDG_SESSION_DESKTOP" = "x11" ]; then 
+		scrot "$FILENAME" --select --line mode=edge
+		xclip -selection clipboard -target image/png "$FILENAME"
+	fi
+else 
+	if [ "$XDG_SESSION_TYPE" = "wayland" ]; then 
+		grim "$FILENAME"
+		wl-copy < "$FILENAME"
+	elif [ "$XDG_SESSION_TYPE" = "x11" ]; then 
+		scrot "$FILENAME"
+		xclip -selection clipboard -target image/png "$FILENAME"
+	fi
+fi
+
+notify-send 'Screenshot Saved' 'Copied to clipboard' --icon=/usr/share/pixmaps/ubuntu-logo.svg

@@ -1,18 +1,18 @@
-swaylock \
-	--clock \
-	--indicator \
-	--screenshots \
-	--text-color C6A0F6 \
-	--inside-color 1B1D2B \
-	\
-	--effect-blur 5x5 \
-	\
-	--ring-color 24273A \
-	--line-color 1B1D2B \
-	--key-hl-color C6A0F6 \
-	--bs-hl-color ED8796 \
-	--separator-color 24273A \
-	\
-	--inside-ver-color 8AADf4 \
-	--inside-wrong-color ED8796 \
-	--fade-in 0.2
+#!/bin/bash 
+
+if [ "$XDG_SESSION_TYPE" == "wayland" ]; then 
+  systemctl --user restart ssh-agent
+  rofi-kpxc lock
+  hyprlock
+  # swaylock \
+  #   --ignore-empty-password --show-failed-attempts \
+  #   --color 000000 \
+  #   # --image $HOME/.local/share/bg.jpg --indicator-caps-lock \
+  #   --text-color C6A0F6 --inside-color 1B1D2B \
+  #   --ring-color 24273A --line-color 1B1D2B \
+  #   --key-hl-color C6A0F6 --bs-hl-color ED8796 --separator-color 24273A \
+  #   --inside-ver-color 8AADf4 --inside-wrong-color ED8796 
+else
+  i3lock --color=000000 --ignore-empty-password --show-failed-attempts --beep --pointer=default
+fi
+
