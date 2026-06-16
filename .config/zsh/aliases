@@ -1,59 +1,70 @@
-## Aliases 
+# Aliases 
 
-# zsh specific
+## zsh specific 
 alias resource="source $XDG_CONFIG_HOME/zsh/.zshrc"
-alias aliases="$EDITOR $XDG_CONFIG_HOME/zsh/aliases"
 
-# Config files 
-alias cfnv="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
-alias cfz="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc"
-alias cfzen="$EDITOR $XDG_CONFIG_HOME/zsh/.zshenv"
-alias cfzp="$EDITOR $XDG_CONFIG_HOME/zsh/.zprofile"
+## pacman fuzzy finding
+alias install-pac="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias rm-pac="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+
+## Config files 
+alias cfnv="$EDITOR $XDG_CONFIG_HOME/nvim/init.lua"
+alias cfz="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc && clear && source $XDG_CONFIG_HOME/zsh/.zshrc"
+alias cfzen="$EDITOR $XDG_CONFIG_HOME/zsh/.zshenv && source $XDG_CONFIG_HOME/zsh/.zshenv"
+alias cfza="$EDITOR $XDG_CONFIG_HOME/zsh/aliases && source $XDG_CONFIG_HOME/zsh/aliases"
 alias cflf="$EDITOR $XDG_CONFIG_HOME/lf/lfrc"
 alias cflfs="$EDITOR $XDG_CONFIG_HOME/lf/scope"
-alias cfb="$EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc"
-alias cfsx="$EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkdrc"
 alias cfk="$EDITOR $XDG_CONFIG_HOME/kitty/kitty.conf"
-alias cfw="$EDITOR $XDG_CONFIG_HOME/waybar/config"
-alias cfws="$EDITOR $XDG_CONFIG_HOME/waybar/style.css"
-alias cfr="$EDITOR $XDG_CONFIG_HOME/rofi/config.rasi"
-alias cfp="$EDITOR $XDG_CONFIG_HOME/polybar/config.ini"
-alias cfpf="$EDITOR $XDG_CONFIG_HOME/pfetch/config"
 
-# Startup scripts
-alias cfx="$EDITOR $XDG_CONFIG_HOME/X11/.xinitrc"
-alias cfpx="$EDITOR $XDG_CONFIG_HOME/X11/.xinitrc-plasma-x11"
-alias cfpw="$EDITOR $XDG_CONFIG_HOME/wayland/plasma-wayland"
-alias cfh="$EDITOR $XDG_CONFIG_HOME/hypr/hyprland.conf"
-alias cfwh="$EDITOR $XDG_CONFIG_HOME/wayland/wrapperhl"
-alias cfhs="$EDITOR $XDG_CONFIG_HOME/hypr/services"
+alias cfh="$EDITOR $XDG_CONFIG_HOME/hypr/hyprland.lua"
+alias cfm="$EDITOR $XDG_CONFIG_HOME/mango/config.conf"
 
-# dotfiles alias
-alias gd="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
-
-# Convenience
+## Convenience
 alias zat="zathura"
-alias ts="sudo timeshift --snapshot-device /dev/nvme0n1p4"
-alias usage="btrfs filesystem usage /"
-alias smtp="simple-mtpfs"
-alias csc="scrcpy --tcpip=192.168.1.48"
-alias lf="lfrun"
-alias v="$EDITOR"
-alias cur="calcurse"
-alias pg="ping google.com"
-alias turoff="sudo x86_energy_perf_policy --turbo-enable 0 && procoff"
-alias turon="sudo x86_energy_perf_policy --turbo-enable 1 && procon"
+alias ts="sudo timeshift"
+alias usage="sudo btrfs filesystem usage /"
 alias sinks="pactl list short sinks"
 alias :q="exit"
-alias st="speedtest"
+alias l="LC_COLLATE=C ls -p --color=auto --group-directories-first"
+alias ll="LC_COLLATE=C ls -lahp --color=auto --group-directories-first"
+alias ls="LC_COLLATE=C ls -lahp --color=auto --group-directories-first"
+alias rg="rg 2> /dev/null"
+alias hl="rg --passthru 2> /dev/null"
+alias y="yay -Sy"
+alias p="sudo pacman -Sy"
+alias p1="ping 1.1.1.1"
+alias pa="ping archlinux.org"
+alias mons="hyprctl monitors all | less"
+alias cls="hyprctl clients | less"
 
-# Restart services
-alias rmb="sudo $EDITOR /etc/mbpfan.conf && sudo systemctl restart mbpfan"
-alias rd="killall dunst && dunst &"
+alias ldock="lazydocker"
+alias pdc="podman compose down && printf '\n\nShutdown all containers complete\n\n' && podman compose up -d  "
+alias pdd="podman compose down && printf '\n\nShutdown all containers complete\n'"
 
-# Wacom 
-alias wac="init-wacom"
-
-# Cleanup
-alias w="wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\""
+## Cleanup
 alias wget="wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\""
+alias adb='HOME="$XDG_DATA_HOME"/android adb'
+
+## Vim aliases
+alias v="$EDITOR"
+alias vim="$EDITOR"
+alias vi="$EDITOR"
+alias vimdiff="nvim -d"
+
+# Fun kitty features
+alias diff="kitty +kitten diff"
+alias gd="git difftool --no-symlinks --dir-diff"
+alias gg="git log --oneline --graph"
+
+# Ansible QOL
+alias ag="ansible-galaxy"
+alias ap="ansible-playbook"
+alias aa="ansible"
+
+# Autocorrect but actually good
+alias chomd="chmod"
+alias ..="echo 'cd ..' && cd .."
+alias ncim="$VISUAL"
+alias nxim="$VISUAL"
+
+alias grep="grep --color=auto 2> /dev/null"
