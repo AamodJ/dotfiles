@@ -1,5 +1,20 @@
 #!/bin/sh
 
-if ! $(killall waybar); then
-	hyprctl dispatch exec waybar
-fi
+if pidof waybar > /dev/null 2>&1; then
+	if killall waybar; then
+		dunstify -a "togglebar" -u low -r 9992 "Status Bar" "OFF" -t 2000 -i /usr/share/pixmaps/archlinux-logo.svg
+	else 
+		dunstify -a "togglebar" -u crit -r 9992 "Status Bar" "FAILED to kill status bar" -t 2000 -i /usr/share/pixmaps/archlinux-logo.svg
+	fi
+else 
+	if [ "$XDG_CURRENT_DESKTOP" = "hyprland" ]; then 
+		hyprctl dispatch 'hl.dsp.exec_cmd("waybar")'
+		dunstify -a "togglebar" -u low -r 9992 "Status Bar" "ON" -t 2000 -i /usr/share/pixmaps/archlinux-logo.svg
+	elif [ "$XDG_CURRENT_DESKTOP" = "mango" ]; then 
+		if mmsg dispatch spawn,waybar > /dev/null 2>&1; then
+			dunstify -a "togglebar" -u low -r 9992 "Status Bar" "ON" -t 2000 -i /usr/share/pixmaps/archlinux-logo.svg
+		else
+			dunstify -a "togglebar" -u crit -r 9992 "Status Bar" "FAILED to START status bar" -t 2000 -i /usr/share/pixmaps/archlinux-logo.svg
+		fi
+	fi
+fi 

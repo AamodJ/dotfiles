@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then 
+	hyprctl dispatch moveworkspacetomonitor 1 0
+
+	if [ "$1" = "mirror" ]; then 
+		for i in $(seq 2 9); do 
+			if [ "$i" -lt 4 ]; then 
+				hyprctl dispatch moveworkspacetomonitor "$i" 2
+			else 
+				hyprctl dispatch moveworkspacetomonitor "$i" 1
+			fi
+		done
+		dunstify -a "monitors" -u low -r 9992 "Monitors set" "Mirrored Configuration" -t 2000 -i /usr/share/pixmaps/archlinux-logo.svg
+	else 
+		for i in $(seq 2 9); do 
+			if [ "$i" -lt 4 ]; then 
+				hyprctl dispatch moveworkspacetomonitor "$i" 1
+			else 
+				hyprctl dispatch moveworkspacetomonitor "$i" 2
+			fi
+		done
+		dunstify -a "monitors" -u low -r 9992 "Monitors set" "Normal Configuration" -t 2000 -i /usr/share/pixmaps/archlinux-logo.svg
+	fi
+elif [ "$XDG_CURRENT_DESKTOP" = "mango" ]; then 
+	if mmsg dispatch toggle_monitor,eDP-1 > /dev/null 2>&1; then 
+		notify-send "Toggled main monitor"
+	else
+		notify-send -u "critical" "Failed toggling monitor!"
+	fi
+fi 

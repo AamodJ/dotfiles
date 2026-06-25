@@ -1,4 +1,0 @@
-#!/bin/sh
-
-cp /home/aamod/.config/fan/fullblast.conf /etc/mbpfan.conf 
-systemctl restart mbpfan
