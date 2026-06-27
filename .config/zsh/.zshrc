@@ -48,8 +48,10 @@ export FZF_DEFAULT_OPTS="--multi --height=40% --preview='cat {}' --preview-windo
 source $XDG_CONFIG_HOME/zsh/aliases
 source $XDG_CONFIG_HOME/lf/icons
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if ! hostnamectl | grep -qF "Operating System: NixOS"; then 
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # fzf keybindings
 source <(fzf --zsh)
