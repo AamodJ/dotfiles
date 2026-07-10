@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 FILENAME=$(xdg-user-dir PICTURES)/screenshots/$(date +'%Y%m%d%H%M%S.png')
 
@@ -20,4 +20,4 @@ else
 	fi
 fi
 
-notify-send 'Screenshot Saved' 'Copied to clipboard' --icon=/usr/share/pixmaps/ubuntu-logo.svg
+notify-send 'Screenshot Saved' 'Copied to clipboard'

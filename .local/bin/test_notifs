@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+notify-send -u critical "Test Notification (CRITICAL)" "This is a test notification" -h int:value:10
+notify-send -u normal "Test Notification (NORMAL)" "This is a test notification" -h int:value:10
+notify-send -u low "Test Notification (LOW)" "This is a test notification" -h int:value:10
