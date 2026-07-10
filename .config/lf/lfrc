@@ -1,31 +1,13 @@
 set ratios 1:2:3
-# Luke's lf settings
-
-
-# Note on Image Previews
-# For those wanting image previews, like this system, there are four steps to
-# set it up. These are done automatically for LARBS users, but I will state
-# them here for others doing it manually.
-#
-# 1. ueberzug must be installed.
-# 2. The scope file (~/.config/lf/scope for me), must have a command similar to
-#    mine to generate ueberzug images.
-# 3. A `set cleaner` line as below is a cleaner script.
-# 4. lf should be started through a wrapper script (~/.local/bin/lfub for me)
-#    that creates the environment for ueberzug. This command can be be aliased
-#    in your shellrc (`alias lf="lfub") or if set to a binding, should be
-#    called directly instead of normal lf.
-
-# Basic vars
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
 set icons
 set period 1
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
-set cleaner '$XDG_CONFIG_HOME/lf/cleaner'
-set previewer '$XDG_CONFIG_HOME/lf/scope'
-map i $$XDG_CONFIG_HOME/lf/scope $f | less -R
+set cleaner "/home/aj/.config/lf/cleaner"
+set previewer "/home/aj/.config/lf/previewer"
+map i $$XDG_CONFIG_HOME/lf/previewer $f | less -R
 set drawbox true
 set ignorecase true
 
@@ -111,4 +93,4 @@ map V push :!$VISUAL<space>
 
 map W $setsid -f $TERMINAL >/dev/null 2>&1
 
-map Y $printf "%s" "$fx" | xclip -selection clipboard
+map Y $printf "%s" "$fx" | wl-copy

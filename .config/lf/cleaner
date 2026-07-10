@@ -1,4 +1,2 @@
-#!/bin/sh
-if [ -n "$FIFO_UEBERZUG" ]; then
-	printf '{"action": "remove", "identifier": "PREVIEW"}\n' > "$FIFO_UEBERZUG"
-fi
+#!/usr/bin/env bash
+exec kitten icat --clear --stdin no --transfer-mode memory </dev/null >/dev/tty
