@@ -1,188 +1,63 @@
 [global]
+follow = keyboard
+enable_posix_regex = true
+width = (300, 500)
+height = (75, 1000)
+offset = (10, 10)
+notification_limit = 10
 
-    # --- Display --- #
+progress_bar_min_width = 300
+progress_bar_max_width = 500
+progress_bar_height = 15
+progress_bar_frame_width = 0
 
-    # The monitor to be displayed to
-    monitor = 0
+frame_width = 2
+gap_size = 10
 
-    # Follow monitor with mouse
-    follow = mouse
+separator_color="#FFFFFF"
 
-    width = 300
-    # height = 260
-    origin = top-right
-    offset = 0x23
+idle_threshold = "5s"
+set_transient = no
 
-    progress_bar = true
-    progress_bar_height = 10
-    progress_bar_frame_width = 1
-    progress_bar_min_width = 150
-    progress_bar_max_width = 300
+font = "Iosevka Aile 10"
+line_height = 2
 
-
-    # Show how many messages are hidden
-    indicate_hidden = yes
-
-    # Shrink window if it's smaller than the width.
-    shrink = no
-
-    # The transparency of the window.
-    transparency = 1
-
-    # Draw a line between multiple notifications
-    separator_height = 4
-
-    separator_color = "#1e2137aa"
-
-    # Set notification padding
-    padding = 16
-    horizontal_padding = 16
-
-    # Disable frame (border)
-    frame_width = 1
-	frame_color = "#1e2137aa"
-
-    # Sort messages by urgency.
-    sort = no
-
-    # Disable idle time
-    idle_threshold = 0
-
-   
-    # --- Text --- #
-
-    # Set the font
-    # font = "Noto Sans 11"
-    font = "Hack Nerd Font 11"
-
-    # Set line height to font height
-    line_height = 0
-
-    # Reference for markup and formatting:
-    #  <b>bold</b>
-    #  <i>italic</i>
-    #  <s>strikethrough</s>
-    #  <u>underline</u>
-    #  <https://developer.gnome.org/pango/stable/pango-Markup.html>.
-    #  %a appname
-    #  %s summary
-    #  %b body
-    #  %i iconname (including its path)
-    #  %I iconname (without its path)
-    #  %p progress value if set ([  0%] to [100%]) or nothing
-    #  %n progress value if set without any extra characters
-    #  %% Literal %
-
-    markup = full
-    format = "<b>%s</b>\n%b"
-
-    # Left align the text
-    alignment = left
-
-    # Vertical alignment of message text and icon.
-    vertical_alignment = center
-
-    # Show age of message if message is old
-    show_age_threshold = 120
-
-    # Wrap text if it doesn't fit in geometry
-    word_wrap = yes
-
-    # Where to place ellipses if word wrap is disabled
-    # ellipsize = middle
-
-    # Use newlines '\n' in notifications.
-    ignore_newline = no
-
-    # Don't stack together notifications
-    stack_duplicates = false
-
-    # Hide the count of stacked notifications
-    # hide_duplicate_count = false
-
-    # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
-
-    
-    # ---- Icons ---- #
-
-    # Align icons left/right/off
-    icon_position = left
-
-    # Scale small icons up to this size, set to 0 to disable.
-    min_icon_size = 60
-
-    # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 60
-
-    # Paths to default icons.
-    icon_path = /home/aamod/.dotfiles/icons
-
-
-    # --- History --- #
-
-    # Avoid timing out hidden notifications
-    sticky_history = yes
-
-    # Maximum amount of notifications kept in history
-    history_length = 100
-
-
-    # --- Misc/Advanced --- #
-
-    dmenu = /usr/bin/dmenu -p dunst:
-
-    # Browser for opening urls in context menu.
-    browser = /usr/bin/firefox -new-tab
-
-    # Always run rule-defined scripts, even if the notification is suppressed
-    always_run_script = false
-
-    # Define the title of the windows spawned by dunst
-    title = Dunst
-
-    # Define the class of the windows spawned by dunst
-    class = Dunst
-
-    # Define the corner radius of the notification window
-    corner_radius = 0
-
-    # Don't gnore the dbus closeNotification message.
-    ignore_dbusclose = false
-
-
-    # --- Legacy --- #
-
-    # Use the Xinerama extension instead of RandR for multi-monitor support.
-    force_xinerama = false
-
-
-    # --- Mouse --- #
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
-
-	corner_radius = 5
-
+icon_path = "/usr/share/pixmaps/"
+enable_recursive_icon_lookup = true
+dmenu = "/usr/sbin/rofi -dmenu "
+default_icon = "/usr/share/pixmaps/archlinux-logo-kanagawa-dark.svg"
+max_icon_size = 50
+max_icon_size = 75
+icon_position = right
+markup = full
 
 [experimental]
-    per_monitor_dpi = false
+pause_on_mouse_over = true
+
 
 [urgency_low]
-    background = "#0a1a25EF"
-    # frame_color = "#52426e"
-	frame_width = 1
-    
-    foreground = "#a9b1d6"
-    timeout = 6
+foreground = "#1F1F28"
+background = "#949FB5"
+timeout = "10s"
+highlight = "#1F1F28"
+frame_color = "#363646"
 
 [urgency_normal]
-    background = "#0a1a25EF"
-    foreground = "#a9b1d6"
-    timeout = 6
+#foreground = "#DCD7BA"
+#background = "#1F1F28"
+#timeout = "20s"
+#highlight = "#DCD7BA"
+#frame_color = "#C8C093"
+
+foreground = "#1F1F28"
+background = "#DCD7BA"
+timeout = "20s"
+highlight = "#1F1F28"
+frame_color = "#363646"
 
 [urgency_critical]
-    background = "#0a1a25EF"
-    foreground = "#a9b1d6"
-	frame_color = "#e34f4f"
-	frame_width = 1
+foreground = "#1F1F28"
+background = "#FF5D62"
+timeout = "0"
+highlight = "#1F1F28"
+frame_color = "#363646"
