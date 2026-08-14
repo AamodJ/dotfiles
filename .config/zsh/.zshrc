@@ -78,8 +78,5 @@ bindkey '^e' kitty_scrollback_edit_command_line
 # by using the environment variable KITTY_SCROLLBACK_NVIM_EDIT_ARGS
 # export KITTY_SCROLLBACK_NVIM_EDIT_ARGS=''
 
-# pfetch 
-fortune | cowsay -f stegosaurus
-
 # Profiling
 # zprof
