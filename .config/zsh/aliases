@@ -32,6 +32,7 @@ alias rg="rg 2> /dev/null"
 alias hl="rg --passthru 2> /dev/null"
 alias y="yay -Sy"
 alias p="sudo pacman -Sy"
+alias ping="ping -O"
 alias p1="ping 1.1.1.1"
 alias pa="ping archlinux.org"
 alias mons="hyprctl monitors all | less"
@@ -40,6 +41,14 @@ alias cls="hyprctl clients | less"
 alias ldock="lazydocker"
 alias pdc="podman compose down && printf '\n\nShutdown all containers complete\n\n' && podman compose up -d  "
 alias pdd="podman compose down && printf '\n\nShutdown all containers complete\n'"
+alias pddv="podman compose down -v && printf '\n\nShutdown all containers with purging data complete\n'"
+alias pds="podman ps -a"
+
+## nix
+alias hm="home-manager"
+alias ns="nix-search -p"
+
+alias gdsh="ls -la $HOME/.dsh/group"
 
 ## Cleanup
 alias wget="wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\""
@@ -55,6 +64,8 @@ alias vimdiff="nvim -d"
 alias diff="kitty +kitten diff"
 alias gd="git difftool --no-symlinks --dir-diff"
 alias gg="git log --oneline --graph"
+alias gs="git status"
+alias gr="git remote -v"
 
 # Ansible QOL
 alias ag="ansible-galaxy"
@@ -66,5 +77,7 @@ alias chomd="chmod"
 alias ..="echo 'cd ..' && cd .."
 alias ncim="$VISUAL"
 alias nxim="$VISUAL"
+alias nivm="$VISUAL"
+alias nicm="$VISUAL"
 
 alias grep="grep --color=auto 2> /dev/null"

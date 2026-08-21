@@ -33,3 +33,8 @@ export PODMAN_COMPOSE_WARNING_LOGS=false
 
 # ssh-agent 
 export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$XDG_RUNTIME_DIR/ssh-agent.socket}"
+
+# Import other aliases
+if [ -f "$XDG_CONFIG_HOME/zsh/other-aliases" ]; then
+    source "$XDG_CONFIG_HOME/zsh/other-aliases"
+fi

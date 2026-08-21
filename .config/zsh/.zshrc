@@ -36,17 +36,22 @@ bindkey -v
 
 # Some export options
 export HISTFILE="$XDG_CONFIG_HOME/zsh/.zsh_history"
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=99999999
+export SAVEHIST=99999999
 
 # Custom prompt
 eval "$(starship init zsh)"
 
+# direnv
+if command -v direnv > /dev/null 2>&1; then
+    eval "$(direnv hook zsh)"
+fi
+
 export FZF_DEFAULT_OPTS="--multi --height=40% --preview='cat {}' --preview-window=right:60%:wrap"
 
 # Sourcing files
-source $XDG_CONFIG_HOME/zsh/aliases
-source $XDG_CONFIG_HOME/lf/icons
+source "$XDG_CONFIG_HOME/zsh/aliases"
+source "$XDG_CONFIG_HOME/lf/icons"
 
 if ! hostnamectl | grep -qF "Operating System: NixOS"; then 
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
