@@ -2,5 +2,6 @@
 .direnv
 .zcompdump
 .zsh_history
+.bash_history
 .rumdl_caches
 other-aliases
