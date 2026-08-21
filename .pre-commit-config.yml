@@ -147,3 +147,10 @@ repos:
         entry: luacheck
         language: system
         types: [lua]
+
+      - id: nixfmt
+        name: nixfmt
+        description: Format nix files
+        entry: nixfmt
+        language: system
+        types: [nix]
