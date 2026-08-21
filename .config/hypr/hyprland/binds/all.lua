@@ -12,9 +12,9 @@ hl.bind("SUPER + l", hl.dsp.window.swap({ direction = "right" }))
 
 -- Workspace binds
 for i = 1, 10 do
-	local key = i % 10
-	hl.bind("CTRL + " .. key, hl.dsp.focus({ workspace = i }))
-	hl.bind("CTRL + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+    local key = i % 10
+    hl.bind("CTRL + " .. key, hl.dsp.focus({ workspace = i }))
+    hl.bind("CTRL + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 hl.bind("CTRL + Space", hl.dsp.focus({ workspace = "previous" }))
 hl.bind("ALT + Return", hl.dsp.workspace.toggle_special("magic"))

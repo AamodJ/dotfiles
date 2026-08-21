@@ -1,6 +1,7 @@
 # dotfiles
 
 Here you'll find configs for:
+
 1. Window manager: `mangowm`
 2. Status bar: `waybar`
 3. Notification client: `dunst`
@@ -11,6 +12,7 @@ Here you'll find configs for:
 8. Portals: `xdg-desktop-portal-hyprland`
 
 Along with the setups, there's common configs for:
+
 1. Terminal: `kitty`
 2. Text editor: `nvim`
 3. File manager: `lf`

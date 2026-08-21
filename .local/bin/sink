@@ -1,59 +1,55 @@
 #!/usr/bin/env bash
 
 send_notification() {
-	if [[ "$(pactl get-sink-mute @DEFAULT_SINK@ | grep -Po "\byes\b")" = "yes" ]]
-	then 
-		volnoti-show -m
-	else 
-		volnoti-show "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)"
-	fi
+    if [[ "$(pactl get-sink-mute @DEFAULT_SINK@ | grep -Po "\byes\b")" = "yes" ]]; then
+        volnoti-show -m
+    else
+        volnoti-show "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1)"
+    fi
 }
 
 allow_inc() {
-	if [[ $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1) -ge 100 ]]; then
-		false
-	else 
-		true
-	fi
+    if [[ $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]+(?=%)" | tail -1) -ge 100 ]]; then
+        false
+    else
+        true
+    fi
 }
 
 toggle() {
-	if [[ "$(pactl get-sink-mute @DEFAULT_SINK@ | grep -Po "\byes\b")" = "yes" ]]
-	then
-		pactl set-sink-mute @DEFAULT_SINK@ toggle
-	fi
+    if [[ "$(pactl get-sink-mute @DEFAULT_SINK@ | grep -Po "\byes\b")" = "yes" ]]; then
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+    fi
 }
 
-case $1 in 
-up) 
-	if allow_inc
-	then
-		toggle
-		pactl set-sink-volume @DEFAULT_SINK@ +5%
-	fi 
-	send_notification 
-	;;
-down) 
-	toggle
-	pactl set-sink-volume @DEFAULT_SINK@ -5%
-	send_notification 
-	;;
-togglemute)
-	pactl set-sink-mute @DEFAULT_SINK@ toggle
-	send_notification 
-	;;
-set)
-	toggle
-	pactl set-sink-volume @DEFAULT_SINK@ 75%
-	send_notification 
-	;;
-mic-mute)
-	pactl set-source-mute @DEFAULT_SOURCE@ toggle
-	if [ "$(pactl get-source-mute @DEFAULT_SOURCE@ | grep yes)" = "Mute: yes" ]; then 
-		notify-send -a "changevol" -u low -r 9991 "Microphone: Muted" -t 2000
-	else 
-		notify-send -a "changevol" -u low -r 9991 "Microphone: Unmuted" -t 2000
-	fi
-	;;
+case $1 in
+    up)
+        if allow_inc; then
+            toggle
+            pactl set-sink-volume @DEFAULT_SINK@ +5%
+        fi
+        send_notification
+        ;;
+    down)
+        toggle
+        pactl set-sink-volume @DEFAULT_SINK@ -5%
+        send_notification
+        ;;
+    togglemute)
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        send_notification
+        ;;
+    set)
+        toggle
+        pactl set-sink-volume @DEFAULT_SINK@ 75%
+        send_notification
+        ;;
+    mic-mute)
+        pactl set-source-mute @DEFAULT_SOURCE@ toggle
+        if [ "$(pactl get-source-mute @DEFAULT_SOURCE@ | grep yes)" = "Mute: yes" ]; then
+            notify-send -a "changevol" -u low -r 9991 "Microphone: Muted" -t 2000
+        else
+            notify-send -a "changevol" -u low -r 9991 "Microphone: Unmuted" -t 2000
+        fi
+        ;;
 esac
-
