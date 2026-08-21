@@ -15,7 +15,7 @@ self = false
 --
 ignore = {
     "113",
-    "212/_.*",
+    "212",
     "631",
 }
 
@@ -44,7 +44,7 @@ read_globals = {
     "math.atan2",
     "jit",
     "pack",
-    "unpack"
+    "unpack",
 }
 
 -- May not be read-only due to client.focus

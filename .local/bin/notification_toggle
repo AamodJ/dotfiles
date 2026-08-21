@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [ "$(dunstctl is-paused)" = "false" ]; then 
+if [ "$(dunstctl is-paused)" = "false" ]; then
     notify-send -r 9993 "Pausing notifications"
     sleep 1
-else 
+else
     notify-send -r 9993 "Resuming notifications"
 fi
 
