@@ -1,13 +1,13 @@
-# Aliases 
+# Aliases
 
-## zsh specific 
+## zsh specific
 alias resource="source $XDG_CONFIG_HOME/zsh/.zshrc"
 
 ## pacman fuzzy finding
-alias install-pac="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias install-pac="pacman -Sql | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias rm-pac="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 
-## Config files 
+## Config files
 alias cfnv="$EDITOR $XDG_CONFIG_HOME/nvim/init.lua"
 alias cfz="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc && clear && source $XDG_CONFIG_HOME/zsh/.zshrc"
 alias cfzen="$EDITOR $XDG_CONFIG_HOME/zsh/.zshenv && source $XDG_CONFIG_HOME/zsh/.zshenv"

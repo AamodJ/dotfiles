@@ -14,18 +14,18 @@ set ignorecase true
 # cmds/functions
 cmd open ${{
     case $(file --mime-type "$(readlink -f $f)" -b) in
-	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) sc-im $fx ;;
-	application/vnd.openxmlformats-officedocument.wordprocessingml.document) open $f ;;
-	image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) zathura $fx >/dev/null 2>&1 ;;
+    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) sc-im $fx ;;
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document) open $f ;;
+    image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) zathura $fx >/dev/null 2>&1 ;;
     text/*|application/json|inode/x-empty) $VISUAL $fx;;
-	image/x-xcf) gimp $f >/dev/null 2>&1 ;;
-	image/svg+xml) display -- $f ;;
-	image/*) nsxiv $f >/dev/null 2>&1;;
-	audio/*) mpv --audio-display=no $f ;;
-	video/*) mpv $f -quiet >/dev/null 2>&1 ;;
-	application/pdf|application/vnd*|application/epub*) zathura $fx >/dev/null 2>&1 ;;
-	application/pgp-encrypted) $EDITOR $fx ;;
-	application/gzip) tar xzvf $fx ;;
+    image/x-xcf) gimp $f >/dev/null 2>&1 ;;
+    image/svg+xml) display -- $f ;;
+    image/*) nsxiv $f >/dev/null 2>&1;;
+    audio/*) mpv --audio-display=no $f ;;
+    video/*) mpv $f -quiet >/dev/null 2>&1 ;;
+    application/pdf|application/vnd*|application/epub*) zathura $fx >/dev/null 2>&1 ;;
+    application/pgp-encrypted) $EDITOR $fx ;;
+    application/gzip) tar xzvf $fx ;;
     *) for f in $fx; do $OPENER $f >/dev/null 2>&1; done;;
     esac
 }}
@@ -33,29 +33,44 @@ cmd open ${{
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
 cmd extract ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	printf "%s\n\t" "$fx"
-	printf "extract?[y/N]"
-	read ans
-	[ $ans = "y" ] && aunpack $fx
+    clear; tput cup $(($(tput lines)/3)); tput bold
+    set -f
+    printf "%s\n\t" "$fx"
+    printf "extract?[y/N]"
+    read ans
+    [ $ans = "y" ] && aunpack $fx
 }}
 
 cmd delete ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	printf "%s\n\t" "$fx"
-	printf "delete?[y/N]"
-	read ans
-	[ $ans = "y" ] && rm -rf -- $fx
+    clear; tput cup $(($(tput lines)/3)); tput bold
+    set -f
+    printf "%s\n\t" "$fx"
+    printf "delete?[y/N]"
+    read ans
+    [ $ans = "y" ] && rm -rf -- $fx
 }}
 
 cmd converth264 ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	clear; 
-	eval ffmpeg -i \"$fx\" -vcodec libx264 -crf 30 $HOME/Videos/output.mp4
-	notify-send "File converted." "File converted to H.264 with crf 30" --icon=$XDG_DATA_HOME/pixmaps/file-video-solid-white.png
+    clear; tput cup $(($(tput lines)/3)); tput bold
+    set -f
+    clear;
+    eval ffmpeg -i \"$fx\" -vcodec libx264 -crf 30 $HOME/Videos/output.mp4
+    notify-send "File converted." "File converted to H.264 with crf 30" --icon=$XDG_DATA_HOME/pixmaps/file-video-solid-white.png
+}}
+
+# zoxide
+cmd z %{{
+    result="$(zoxide query --exclude "$PWD" "$@" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+cmd zi ${{
+    result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+cmd on-cd &{{
+    zoxide add "$PWD"
 }}
 
 cmd setbg "$1"
@@ -79,7 +94,7 @@ map o &mimeopen $f
 map O $mimeopen --ask $f
 
 map A rename # at the very end
-map a push A<a-b><a-b><a-f> # before extention
+map a push A<a-b><a-b><a-f> # before extension
 map c push A<a-b> # after extension
 map I push A<c-a> # at the very beginning
 map B bulkrename
