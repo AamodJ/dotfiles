@@ -44,7 +44,7 @@ read_globals = {
     "math.atan2",
     "jit",
     "pack",
-    "unpack",
+    "unpack"
 }
 
 -- May not be read-only due to client.focus
