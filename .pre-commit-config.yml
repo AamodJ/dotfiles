@@ -1,0 +1,148 @@
+---
+default_install_hook_types:
+  - pre-commit
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: check-merge-conflict
+        args: ["--assume-in-merge"]
+      - id: check-symlinks
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: trailing-whitespace
+        exclude: ".(md|rst)$"
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: check-yaml
+      - id: check-xml
+      - id: check-toml
+      - id: check-json
+      - id: pretty-format-json
+        args:
+          - --autofix
+
+  # YAML
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: cba56bcde1fdd01c1deb3f945e69764c291a6530  # frozen: v1.38.0
+    hooks:
+      - id: yamllint
+        args: ["-d relaxed"]
+  - repo: https://github.com/google/yamlfmt
+    rev: 21ca5323a9c87ee37a434e0ca908efc0a89daa07  # frozen: v0.21.0
+    hooks:
+      - id: yamlfmt
+        language: system
+
+  # Lua
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: 5ae6e7a55748414b4be30a832afd895014c65352  # frozen: v2.5.2
+    hooks:
+      - id: stylua-system
+
+  # EditorConfig
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3aa28ce11a84d747c5695ad10b81945f2400b54f  # frozen: 3.8.0
+    hooks:
+      - id: editorconfig-checker
+
+  # Spelling
+  - repo: https://github.com/crate-ci/typos
+    rev: 8a48f81b6c64dcfea44b3633223084c4be58ac5f  # frozen: v1.49.0
+    hooks:
+      - id: typos
+
+  # Png
+  - repo: https://github.com/oxipng/oxipng
+    rev: 340cd9878d8d8289f09fa101b48a8f5f0b7783f4  # frozen: v10.2.0
+    hooks:
+      - id: oxipng
+        args: ["-o", "4", "--strip", "safe", "--alpha"]
+
+  # Github action
+  - repo: https://github.com/rhysd/actionlint
+    rev: 914e7df21a07ef503a81201c76d2b11c789d3fca  # frozen: v1.7.12
+    hooks:
+      - id: actionlint-system
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: 451b56af716f9f0d0c2b816503a3fd0cf8b036fa  # frozen: v1.29.0
+    hooks:
+      - id: zizmor
+
+  # Docker file
+  - repo: https://github.com/AleksaC/hadolint-py
+    rev: 6e7504451511eaeb62a3e7f14d63b0296cbf86eb  # frozen: v2.15.1
+    hooks:
+      - id: hadolint
+  - repo: https://github.com/reteps/dockerfmt
+    rev: 5c9b576cff2b0f3c323785ed9aa86838d1ae2228  # frozen: v0.5.4
+    hooks:
+      - id: dockerfmt
+        args:
+          - --indent=4
+          - --write
+
+  # Security
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: 01886c8a910c64595c47f186ca1ffc0b77fa5458  # frozen: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args:
+          - --exclude-files
+          - .pre-commit-config.yml
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e  # frozen: v8.30.1
+    hooks:
+      - id: gitleaks
+
+  # Makefile
+  - repo: https://github.com/checkmake/checkmake.git
+    rev: 59931d556f8f5cf4fbacf2c8390a8122ef7a881d  # frozen: v0.3.2
+    hooks:
+      - id: checkmake-system
+
+  # Markdown
+  - repo: https://github.com/rvben/rumdl-pre-commit
+    rev: 344543e77e653d3500a98ffd56cf41bcb92dc05c  # frozen: v0.2.53
+    hooks:
+      - id: rumdl-fmt
+        args:
+          - --disable
+          - MD013
+
+  # Local tool (shellcheck / shfmt)
+  - repo: local
+    hooks:
+      - id: shellcheck
+        name: shellcheck
+        description: Test shell scripts with shellcheck
+        entry: shellcheck
+        language: system
+        types: [shell]
+        require_serial: true
+        args:
+          - --external-sources
+
+      - id: shfmt
+        name: shfmt
+        description: Format shell scripts with shfmt
+        entry: shfmt
+        language: system
+        types: [shell]
+        args: [--write]
+        exclude_types: [csh, tcsh, zsh]
+
+      - id: luacheck
+        name: Luacheck
+        description: Lint and static analysis of Lua code
+        entry: luacheck
+        language: system
+        types: [lua]
