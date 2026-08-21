@@ -1,5 +1,6 @@
-# Clean up 
-export ZSHZ_DATA="$XDG_CONFIG_HOME/z/.z" 
+# shellcheck disable=SC2148
+# Clean up
+export ZSHZ_DATA="$XDG_CONFIG_HOME/z/.z"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export GOPATH="$XDG_DATA_HOME/go"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
@@ -18,7 +19,7 @@ export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
 export FZF_COMPLETION_TRIGGER="."
 export FZF_COMPLETION_OPTS="--border --info=inline"
 
-# Timezone 
+# Timezone
 export TZ="Indian/Mauritius"
 
 # Environment variables
@@ -27,14 +28,15 @@ export EDITOR=nvim
 export TERMINAL=kitty
 export TERM="xterm-256color"
 
-# Podman rootless 
+# Podman rootless
 export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 export PODMAN_COMPOSE_WARNING_LOGS=false
 
-# ssh-agent 
+# ssh-agent
 export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$XDG_RUNTIME_DIR/ssh-agent.socket}"
 
 # Import other aliases
 if [ -f "$XDG_CONFIG_HOME/zsh/other-aliases" ]; then
+    # shellcheck disable=SC1091
     source "$XDG_CONFIG_HOME/zsh/other-aliases"
 fi
