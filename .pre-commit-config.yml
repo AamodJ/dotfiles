@@ -54,12 +54,6 @@ repos:
     hooks:
       - id: editorconfig-checker
 
-  # Spelling
-  - repo: https://github.com/crate-ci/typos
-    rev: 8a48f81b6c64dcfea44b3633223084c4be58ac5f  # frozen: v1.49.0
-    hooks:
-      - id: typos
-
   # Png
   - repo: https://github.com/oxipng/oxipng
     rev: 340cd9878d8d8289f09fa101b48a8f5f0b7783f4  # frozen: v10.2.0
@@ -131,6 +125,12 @@ repos:
         require_serial: true
         args:
           - --external-sources
+
+      - id: typos
+        name: typos
+        description: Check for typos
+        entry: typos
+        language: system
 
       - id: shfmt
         name: shfmt
