@@ -1,4 +1,4 @@
-# shellcheck disable=SC2148,SC1094,SC1090,SC1091,SC2034
+# shellcheck disable=SC2148,SC1094,SC1090,SC1091,SC2034,SC2164
 # Profiling
 # zmodload zsh/zprof
 
@@ -10,7 +10,7 @@ lfcd() {
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
         rm -f "$tmp" >/dev/null
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir" || exit
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
 ## Needed for changing cursors when changing vim mode
