@@ -13,7 +13,8 @@ logit() {
 
 # Source bash configs when run as normal user
 if [[ "$(whoami)" != "root" ]]; then
-    mapfile -t bash_configs < <(find "./.config/bash" -type f ! -name "root_login_init.sh")
+    bash_configs=("$HOME/.config/bash/aliases.sh" "$HOME/.config/bash/configure.sh" "$HOME/.config/bash/shell_options.sh")
+
     for config in "${bash_configs[@]}"; do
         logit "Sourcing $config"
         # shellcheck disable=SC1090
