@@ -7,4 +7,4 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export PATH="$PATH:$HOME/.local/bin"
 
 # shellcheck disable=SC1091
-[[ $- == *i* ]] && . "$XDG_CONFIG_HOME/bash/bashrc"
+[[ $- == *i* ]] && . "$HOME/.bashrc"
