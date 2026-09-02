@@ -1,0 +1,260 @@
+# shellcheck disable=SC2164,SC1094,SC1091,SC2148
+# Get sourced only on interactive prompt
+[[ $- != *i* ]] && return
+
+# Don't check mail when opening terminal.
+unset MAILCHECK
+
+# Clean up
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export ANSIBLE_HOME="$XDG_DATA_HOME/ansible"
+
+# fzf completion customization
+export FZF_COMPLETION_TRIGGER="."
+export FZF_COMPLETION_OPTS="--border --info=inline"
+
+# Environment variables
+export VISUAL=vim
+export EDITOR=vim
+export GIT_EDITOR='vim'
+export TERM="xterm-256color"
+
+# Less configuration
+export LESS='--chop-long-lines --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS --no-init'
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;48;5;121;91;1;4m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+export MANPAGER="less --no-init --RAW-CONTROL-CHARS"
+export MANROFFOPT=-c
+
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+export GREP_COLORS='sl=49;39:cx=49;39:mt=48;5;121;91;1;4:fn=49;35:ln=49;32:bn=49;32:se=49;36'
+
+# Aliases
+## General aliases
+if [ -r /etc/bash_aliases ]; then
+    . /etc/bash_aliases
+fi
+
+## Convenience
+alias :q="exit"
+alias ..='cd ..'
+alias ...='cd ../..'
+export LS_OPTIONS="-p --color=auto --group-directories-first"
+alias l='LC_COLLATE=C ls $LS_OPTIONS'
+alias ll='LC_COLLATE=C ls -lah $LS_OPTIONS'
+alias ls='LC_COLLATE=C ls -lah $LS_OPTIONS'
+alias ping="ping -O"
+alias p1="ping 1.1.1.1"
+
+alias gdsh='ls -la $HOME/.dsh/group'
+
+## Cleanup
+alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
+
+## Vim aliases
+alias v='$EDITOR'
+alias vim='$EDITOR'
+alias vi='$EDITOR'
+
+## Ansible QOL
+alias ag="ansible-galaxy"
+alias ap="ansible-playbook"
+alias aa="ansible"
+
+## Autocorrect but actually good
+alias chomd="chmod"
+alias ..="echo 'cd ..' && cd .."
+alias ncim='$VISUAL'
+alias nxim='$VISUAL'
+alias nivm='$VISUAL'
+alias nicm='$VISUAL'
+
+# Git
+alias gg='git log --graph --pretty=format:"%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(reset) %C(cyan)%cd %C(blue)(%cr)%Creset" --date=format:"%Y-%m-%d %Hh%M"'
+alias ggs='gg --stat'
+alias gs='git status'
+alias gss='git status -s'
+alias gd='git diff'
+alias gwc='git whatchanged'
+
+# Color
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias bzgrep='bzgrep --color=auto'
+alias zgrep='zgrep --color=auto'
+alias zstdgrep='zstdgrep --color=auto'
+
+# History
+HISTFILE="$HOME/.config/bash/.bash_history"
+HISTFILESIZE=9999999
+HISTSIZE=9999999
+# Add time in history
+HISTTIMEFORMAT="%F %T "
+# Write history after each command
+export PROMPT_COMMAND="history -a"
+mkdir -p "$(dirname "$HISTFILE")"
+
+# Shell options
+# Enable vim mode
+set -o vi
+# autocd
+shopt -s autocd
+# Update window size after every command
+shopt -s checkwinsize
+# Append to the history file, don't overwrite it
+shopt -s histappend
+# Save multi-line commands as one command
+shopt -s cmdhist
+# Correct spelling errors during tab-completion
+shopt -s dirspell 2>/dev/null
+# Correct spelling errors in arguments supplied to cd
+shopt -s cdspell 2>/dev/null
+# Enable history expansion with space
+# E.g. typing !!<space> will replace the !! with your last command
+bind Space:magic-space
+# Turn on recursive globbing (enables ** to recurse all directories)
+shopt -s globstar 2>/dev/null
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+# Prevent overwriting files with >
+# Appending with >> works as normal
+# To overwrite with intent, run >|
+set -o noclobber
+
+# Set default permission to 644 for files, 755 for directories
+umask 022
+
+# Perform file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
+# Treat hyphens and underscores as equivalent
+bind "set completion-map-case on"
+# Display matches for ambiguous patterns at first tab press
+bind "set show-all-if-ambiguous on"
+# Immediately add a trailing slash when autocompleting symlinks to directories
+bind "set mark-symlinked-directories on"
+
+# ------------------------- GNU Readline is awesome -------------------------
+bind 'set show-all-if-ambiguous on'
+## Enable vim mode
+bind 'set editing-mode vi'
+bind 'set show-mode-in-prompt on'
+bind 'set vi-cmd-mode-string \1\e[2 q\2'
+bind 'set vi-ins-mode-string \1\e[6 q\2'
+## Smart history search
+## these are for vi-command mode
+bind -m vi-command '"\e[A": history-search-backward'
+bind -m vi-command '"\e[B": history-search-forward'
+bind -m vi-command 'j: history-search-forward'
+bind -m vi-command 'k: history-search-backward'
+bind -m vi-command '"gc": insert-comment'
+bind -m vi-command '"Y": yank-last-arg'
+# these are for vi-insert mode
+bind -m vi-command '"\e[A": history-search-backward'
+bind -m vi-command '"\e[B": history-search-forward'
+bind 'set keyseq-timeout 0'
+## Don't echo control characters
+bind 'set echo-control-characters off'
+## Safer paste
+bind 'set enable-bracketed-paste on'
+# ---------------------------------------------------------------------------
+
+if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+    user_color="\[\e[1;34m\]"
+    if [ "$(whoami)" = root ]; then
+        user_color="\[\e[1;31m\]"
+    fi
+
+    if [ -r /etc/bash_completion.d/git-prompt ]; then
+        source /etc/bash_completion.d/git-prompt
+    elif [ -r /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+        source /usr/share/git-core/contrib/completion/git-prompt.sh
+    fi
+
+    PS1_GIT_PRE="\[\e[0;37m\]\\t ${user_color}\u\[\e[01;33m\]@\[\e[01;36m\]\h \[\e[01;33m\]\w\[\e[0m\]"
+    PS1_GIT_POST=" ${user_color}❯\[\e[0m\] "
+else
+    color_prompt=
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1="$PS1_GIT_PRE$PS1_GIT_POST"
+else
+    PS1='\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# enable color support of ls and also add handy aliases
+if command -v dircolors >/dev/null 2>&1; then
+    if [ -r ~/.dircolors ]; then
+        eval "$(dircolors -b ~/.dircolors)"
+    else
+        eval "$(dircolors -b)"
+    fi
+    export LS_OPTIONS='--color=auto -h'
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
+fi
+
+if [[ $(type -t __git_ps1) == function ]] && [[ $PROMPT_COMMAND != *__git_ps1* ]]; then
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWSTASHSTATE=1
+    export GIT_PS1_SHOWUNTRACKEDFILES=1
+    export GIT_PS1_SHOWUPSTREAM=auto
+    export GIT_PS1_DESCRIBE_STYLE=branch
+    export GIT_PS1_SHOWCOLORHINTS=1
+    # GIT_PS1_SHOWCOLORHINTS requires __git_ps1 to build PS1 itself (via
+    # PROMPT_COMMAND) instead of being command-substituted inside PS1,
+    # otherwise its color codes aren't wrapped in \[..\] and bash miscounts
+    # the prompt width.
+    PROMPT_COMMAND='history -a; __git_ps1 "$PS1_GIT_PRE" "$PS1_GIT_POST" " [%s]"'
+fi
+
+define_locale() {
+    local locale locales=(
+        C.utf8
+        C.UTF-8
+        en_US.utf8
+        en_IE.utf8
+        en_GB.utf8
+        C
+    )
+
+    for locale in "${locales[@]}"; do
+        if locale -a | grep -q "^$locale"; then
+            export LC_ALL="$locale"
+            return
+        fi
+    done
+}
+
+define_locale
+
+# Source my bashrc when switching to root
+sudo() {
+    if [[ "$1" = "-i" && "$#" -eq 1 ]]; then
+        command sudo bash --rcfile "$HOME/.bashrc"
+    else
+        command sudo "$@"
+    fi
+}
