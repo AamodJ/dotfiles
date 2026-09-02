@@ -31,7 +31,6 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 export GREP_COLORS='sl=49;39:cx=49;39:mt=48;5;121;91;1;4:fn=49;35:ln=49;32:bn=49;32:se=49;36'
 
 # History
-HISTFILE="$HOME/.bash_history"
 HISTFILESIZE=9999999
 HISTSIZE=9999999
 # Add time in history
