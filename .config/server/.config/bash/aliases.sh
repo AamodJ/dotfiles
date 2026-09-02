@@ -25,6 +25,7 @@ alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
 alias v='$EDITOR'
 alias vim='$EDITOR'
 alias vi='$EDITOR'
+alias nvim='$EDITOR'
 
 ## Ansible QOL
 alias ag="ansible-galaxy"
