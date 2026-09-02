@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ssh_opts=(-o PreferredAuthentications=publickey)
+rsync_opts=(--archive --checksum --human-readable --partial --info=progress2 -zz --copy-links --no-owner --no-group --sparse)
+rsync_dry_run_opts=(--archive --checksum -zz --copy-links --sparse --itemize-changes --dry-run)
+SERVER_CONFIGS="$XDG_CONFIG_HOME/server/"
+
+logit() {
+    local level=${2:-"NOTE"}
+    local msg=$1
+
+    echo "[$level]: $msg"
+}
+
+ssh_connect() {
+    command ssh "$@"
+}
+
+if [[ ! -d "$SERVER_CONFIGS" ]]; then
+    logit "No Server Configs found. Not syncing" "WARN"
+else
+    user=$(command ssh -G "$@" | awk '$1 ~ /^user$/ { print $2 }')
+    host=$(command ssh -G "$@" | awk '$1 ~ /^hostname$/ { print $2 }')
+    port=$(command ssh -G "$@" | awk '$1 ~ /^port$/ { print $2 }')
+    if [[ "$user" != "root" ]]; then
+        # sync dotfiles
+        files_changed=$(rsync "${rsync_dry_run_opts[@]}" --rsh "ssh ${ssh_opts[*]} -p $port" "$SERVER_CONFIGS" "$host":)
+        if [ ! -z "$files_changed" ]; then
+            logit "Dotfiles have changed. Changes:" "WARN"
+            echo "$files_changed"
+            read -rp "[WARN]: Do you wish to sync? [N/y]: " response
+        else
+            response="N"
+        fi
+        if [[ "$response" =~ ^[Yy]$ ]]; then
+            logit "Syncing $SERVER_CONFIGS"
+            rsync "${rsync_opts[@]}" --rsh "ssh ${ssh_opts[*]} -p $port" "$SERVER_CONFIGS" "$host":
+        fi
+    fi
+fi
+
+ssh_connect "$@"
