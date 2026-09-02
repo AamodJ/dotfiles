@@ -18,9 +18,6 @@ alias p1="ping 1.1.1.1"
 
 alias gdsh='ls -la $HOME/.dsh/group'
 
-## Cleanup
-alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
-
 ## Vim aliases
 alias v='$EDITOR'
 alias vim='$EDITOR'
