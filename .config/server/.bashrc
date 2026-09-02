@@ -30,14 +30,14 @@ bind 'set show-mode-in-prompt on'
 bind 'set vi-cmd-mode-string \1\e[2 q\2'
 bind 'set vi-ins-mode-string \1\e[6 q\2'
 ## Smart history search
-## these are for vi-command mode
+## in vi-command mode
 bind -m vi-command '"\e[A": history-search-backward'
 bind -m vi-command '"\e[B": history-search-forward'
 bind -m vi-command 'j: history-search-forward'
 bind -m vi-command 'k: history-search-backward'
 bind -m vi-command '"gc": insert-comment'
 bind -m vi-command '"Y": yank-last-arg'
-# these are for vi-insert mode
+## in vi-insert mode
 bind -m vi-command '"\e[A": history-search-backward'
 bind -m vi-command '"\e[B": history-search-forward'
 bind 'set keyseq-timeout 0'
