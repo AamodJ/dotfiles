@@ -11,16 +11,14 @@ logit() {
     echo "user=$running_as: [$level]: $msg"
 }
 
-# Source bash configs when run as normal user
-if [[ "$(whoami)" != "root" ]]; then
-    bash_configs=("$HOME/.config/bash/aliases.sh" "$HOME/.config/bash/configure.sh" "$HOME/.config/bash/shell_options.sh")
-
-    for config in "${bash_configs[@]}"; do
-        logit "Sourcing $config"
-        # shellcheck disable=SC1090
-        . "$config"
-    done
-fi
+# Source bash configs
+# We don't arbitrarily source all files inside the .config/bash dir
+bash_configs=("$HOME/.config/bash/aliases.sh" "$HOME/.config/bash/configure.sh" "$HOME/.config/bash/shell_options.sh")
+for config in "${bash_configs[@]}"; do
+    logit "Sourcing $config"
+    # shellcheck disable=SC1090
+    . "$config"
+done
 
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     # We have color support; assume it's compliant with Ecma-48
