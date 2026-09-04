@@ -26,7 +26,7 @@ else
     port=$(command ssh -G "$@" | awk '$1 ~ /^port$/ { print $2 }')
     if [[ "$user" != "root" ]]; then
         # sync dotfiles
-        files_changed=$(rsync "${rsync_dry_run_opts[@]}" --rsh "ssh ${ssh_opts[*]} -p $port" "$SERVER_CONFIGS" "$host":)
+        files_changed=$(rsync "${rsync_dry_run_opts[@]}" --rsh "ssh ${ssh_opts[*]} -p $port" "$SERVER_CONFIGS" "$user"@"$host":)
         if [ ! -z "$files_changed" ]; then
             logit "Dotfiles have changed. Changes:" "WARN"
             echo "$files_changed"
@@ -36,7 +36,7 @@ else
         fi
         if [[ "$response" =~ ^[Yy]$ ]]; then
             logit "Syncing $SERVER_CONFIGS"
-            rsync "${rsync_opts[@]}" --rsh "ssh ${ssh_opts[*]} -p $port" "$SERVER_CONFIGS" "$host":
+            rsync "${rsync_opts[@]}" --rsh "ssh ${ssh_opts[*]} -p $port" "$SERVER_CONFIGS" "$user"@"$host":
         fi
     fi
 fi
