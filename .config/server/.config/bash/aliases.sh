@@ -38,7 +38,7 @@ alias nivm='$VISUAL'
 alias nicm='$VISUAL'
 
 # Git
-alias gg='git log --graph --pretty=format:"%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(reset) %C(cyan)%cd %C(blue)(%cr)%Creset" --date=format:"%Y-%m-%d %Hh%M"'
+alias gg='git log --graph --date=format:"%Y-%m-%d %Hh%M" --oneline'
 alias ggs='gg --stat'
 alias gs='git status'
 alias gss='git status -s'
