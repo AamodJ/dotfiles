@@ -64,6 +64,7 @@ alias vimdiff="nvim -d"
 alias diff="kitty +kitten diff"
 alias gd="git difftool --no-symlinks --dir-diff"
 alias gg="git log --oneline --graph"
+alias ggs="gg -s"
 alias gs="git status"
 alias gr="git remote -v"
 
