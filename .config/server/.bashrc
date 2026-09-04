@@ -22,31 +22,6 @@ if [[ "$(whoami)" != "root" ]]; then
     done
 fi
 
-# ------------------------- GNU Readline settings -------------------------
-bind 'set show-all-if-ambiguous on'
-## Enable vim mode
-bind 'set editing-mode vi'
-bind 'set show-mode-in-prompt on'
-bind 'set vi-cmd-mode-string \1\e[2 q\2'
-bind 'set vi-ins-mode-string \1\e[6 q\2'
-## Smart history search
-## in vi-command mode
-bind -m vi-command '"\e[A": history-search-backward'
-bind -m vi-command '"\e[B": history-search-forward'
-bind -m vi-command 'j: history-search-forward'
-bind -m vi-command 'k: history-search-backward'
-bind -m vi-command '"gc": insert-comment'
-bind -m vi-command '"Y": yank-last-arg'
-## in vi-insert mode
-bind -m vi-command '"\e[A": history-search-backward'
-bind -m vi-command '"\e[B": history-search-forward'
-bind 'set keyseq-timeout 0'
-## Don't echo control characters
-bind 'set echo-control-characters off'
-## Safer paste
-bind 'set enable-bracketed-paste on'
-# -------------------------------------------------------------------------
-
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     # We have color support; assume it's compliant with Ecma-48
     # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
