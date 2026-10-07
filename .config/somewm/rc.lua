@@ -62,8 +62,9 @@ if awesome.x11_fallback_info then
 end
 -- }}}
 
--- Theme
-beautiful.init("theme")
+require("config.theme")
+
+require("config.monitor")
 
 -- Initialize lockscreen (must be after beautiful.init)
 require("lockscreen").init()
@@ -77,8 +78,6 @@ local modkey = "Mod4" -- = SUPER
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
-
-require("tags")
 
 -- {{{ Wallpaper
 -- @DOC_WALLPAPER@
@@ -253,9 +252,6 @@ end)
 
 -- }}}
 
--- Keybindings
-require("binds")
-
 -- {{{ Rules
 -- Rules to apply to new clients.
 -- @DOC_RULES@
@@ -334,3 +330,6 @@ end)
 client.connect_signal("mouse::enter", function(c)
     c:activate({ context = "mouse_enter", raise = false })
 end)
+
+require("config.binds")
+require("config.tags")
