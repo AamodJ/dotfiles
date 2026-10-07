@@ -62,9 +62,9 @@ if awesome.x11_fallback_info then
 end
 -- }}}
 
-require("config.theme")
+require("conf.theme")
 
-require("config.monitor")
+require("conf.monitor")
 
 -- Initialize lockscreen (must be after beautiful.init)
 require("lockscreen").init()
@@ -331,5 +331,5 @@ client.connect_signal("mouse::enter", function(c)
     c:activate({ context = "mouse_enter", raise = false })
 end)
 
-require("config.binds")
-require("config.tags")
+require("conf.binds")
+require("conf.tags")
