@@ -22,11 +22,10 @@ awful.mouse.append_global_mousebindings({
 
 -- General Awesome keys
 awful.keyboard.append_global_keybindings({
-    awful.key({ super }, "s", spawn("slack"), { description = "show help", group = "awesome" }),
     awful.key({ super }, "w", function()
         mymainmenu:show()
     end, { description = "show main menu", group = "awesome" }),
-    awful.key({ super, ctrl }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
+    awful.key({ super, shift }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
     awful.key({ super, shift }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
     awful.key({ super }, "l", function()
         awful.tag.incmwfact(0.05)
@@ -233,3 +232,28 @@ client.connect_signal("request::default_keybindings", function()
         end, { description = "(un)maximize horizontally", group = "client" }),
     })
 end)
+
+-- Apps
+awful.keyboard.append_global_keybindings({
+    awful.key({ super }, "s", spawn("slack")),
+    awful.key({ super }, "c", spawn("librewolf")),
+    awful.key({ super }, "e", spawn("nautilus")),
+})
+
+-- menu
+awful.keyboard.append_global_keybindings({
+    awful.key({ alt }, "Space", spawn("rofi -terminal kitty -show drun")),
+    awful.key({ super, alt }, "m", spawn("rofi -show run")),
+    awful.key({ super }, "Space", spawn("rofi -show calc -no-show-match -no-sort")),
+    awful.key({ super }, "r", spawn("rofi -show emoji")),
+    awful.key({ super }, "y", spawn("rofi -show ssh")),
+    awful.key({ super }, "v", spawn("cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy")),
+    awful.key(
+        { super },
+        "p",
+        spawn(
+            "rofi -theme-str 'element-icon { size: 3ch;}' -combi-modi 'snippets:snippy-snippet rofi' -show combi -modi combi"
+        )
+    ),
+    awful.key({ super }, "o", spawn("rofi-kpxc")),
+})
