@@ -26,7 +26,10 @@ naughty.connect_signal("request::display_error", function(message, startup)
 end)
 
 -- Make these global
-_G.modkey = "Mod4" -- = SUPER
+_G.super = "Mod4"
+_G.alt = "Mod1"
+_G.ctrl = "Control"
+_G.shift = "Shift"
 _G.terminal = "kitty"
 
 require("conf.theme")
