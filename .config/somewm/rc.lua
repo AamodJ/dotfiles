@@ -4,10 +4,7 @@
 pcall(require, "luarocks.loader")
 
 -- @DOC_REQUIRE_SECTION@
-local awful = require("awful")
 require("awful.autofocus")
-local wibox = require("wibox")
-local beautiful = require("beautiful")
 local naughty = require("naughty")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -39,27 +36,6 @@ require("conf.monitor")
 -- Initialize lockscreen (must be after beautiful.init)
 require("lockscreen").init()
 
--- {{{ Wallpaper
--- @DOC_WALLPAPER@
-screen.connect_signal("request::wallpaper", function(s)
-    awful.wallpaper({
-        screen = s,
-        widget = {
-            {
-                image = beautiful.wallpaper,
-                upscale = true,
-                downscale = true,
-                widget = wibox.widget.imagebox,
-            },
-            valign = "center",
-            halign = "center",
-            tiled = false,
-            widget = wibox.container.tile,
-        },
-    })
-end)
--- }}}
-
 -- {{{ Tag persistence across monitor hotplug
 -- The save handler lives in awful.permissions.tag_screen and stores tag
 -- metadata into awful.permissions.saved_tags keyed by connector name.
@@ -67,13 +43,9 @@ end)
 --   tag.disconnect_signal("request::screen", awful.permissions.tag_screen)
 -- }}}
 
--- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:activate({ context = "mouse_enter", raise = false })
-end)
-
 require("conf.rules")
 require("conf.binds")
+require("conf.input")
 require("conf.tags")
 require("conf.notifications")
 require("conf.status-bar")

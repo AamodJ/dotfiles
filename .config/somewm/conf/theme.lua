@@ -1,3 +1,6 @@
+local beautiful = require("beautiful")
+local gears = require("gears")
+
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
@@ -82,6 +85,9 @@ theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
 
+theme.cursor_theme = "vimix-kanagawa-cursors-lotus"
+theme.cursor_size = 30
+
 -- Set different colors for urgent notifications.
 rnotification.connect_signal("request::rules", function()
     rnotification.append_rule({
@@ -90,4 +96,8 @@ rnotification.connect_signal("request::rules", function()
     })
 end)
 
-return theme
+beautiful.init(theme)
+
+screen.connect_signal("request::wallpaper", function(s)
+    gears.wallpaper.maximized(beautiful.wallpaper, s)
+end)
