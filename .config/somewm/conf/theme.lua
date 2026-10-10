@@ -8,24 +8,35 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font = "sans 8"
+theme.font = "JetBrainsMono Nerd Font"
 
-theme.bg_normal = "#222222"
-theme.bg_focus = "#535d6c"
-theme.bg_urgent = "#ff0000"
+theme.bg_normal = "#201b14"
+theme.bg_focus = "#dfc5a4"
+theme.bg_urgent = "#e82424"
 theme.bg_minimize = "#444444"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#aaaaaa"
-theme.fg_focus = "#ffffff"
-theme.fg_urgent = "#ffffff"
-theme.fg_minimize = "#ffffff"
+-- theme.fg_normal = "#aaaaaa"
+-- theme.fg_focus = "#ffffff"
+-- theme.fg_urgent = "#ffffff"
+-- theme.fg_minimize = "#ffffff"
 
 theme.useless_gap = dpi(0)
 theme.border_width = dpi(1)
-theme.border_color_normal = "#000000"
-theme.border_color_active = "#535d6c"
-theme.border_color_marked = "#91231c"
+theme.border_color_normal = "#444444"
+-- theme.border_color_active = "#dfc5a4"
+theme.border_focus = "#dfc5a4"
+theme.border_color_marked = "#e82424"
+
+-- theme.rootcolor = "#201b14"
+-- theme.focuscolor = "#dfc5a4"
+-- theme.bordercolor = "#444444"
+-- theme.dropcolor = "#ffdcd7"
+-- theme.maximizescreencolor = "#89aa61"
+-- theme.urgentcolor = "#e82424"
+-- theme.scratchpadcolor = "#516c93"
+-- theme.globalcolor = "#7e9cd8"
+-- theme.overlaycolor = "#14a57c"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -75,7 +86,7 @@ theme.icon_theme = nil
 rnotification.connect_signal("request::rules", function()
     rnotification.append_rule({
         rule = { urgency = "critical" },
-        properties = { bg = "#ff0000", fg = "#ffffff" },
+        properties = { bg = "#e82424", fg = "#ffffff" },
     })
 end)
 

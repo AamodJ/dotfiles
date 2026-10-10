@@ -1,9 +1,6 @@
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
-local modkey = "Mod4" -- = SUPER
-local terminal = "kitty"
-
 -- {{{ Mouse bindings
 -- @DOC_ROOT_BUTTONS@
 awful.mouse.append_global_mousebindings({
@@ -29,33 +26,22 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "l", function()
         awful.tag.incmwfact(0.05)
     end, { description = "increase master width factor", group = "layout" }),
-    awful.key({ modkey, "Shift" }, "Escape", function()
+    awful.key({ modkey }, "Backspace", function()
         awesome.lock()
     end, { description = "lock screen", group = "awesome" }),
-    awful.key({ modkey }, "x", function()
-        awful.prompt.run({
-            prompt = "Run Lua code: ",
-            textbox = awful.screen.focused().mypromptbox.widget,
-            exe_callback = awful.util.eval,
-            history_path = awful.util.get_cache_dir() .. "/history_eval",
-        })
-    end, { description = "lua execute prompt", group = "awesome" }),
     awful.key({ modkey }, "Return", function()
         awful.spawn(terminal)
     end, { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey }, "r", function()
         awful.screen.focused().mypromptbox:run()
     end, { description = "run prompt", group = "launcher" }),
-    awful.key({ modkey }, "p", function()
-        menubar.show()
-    end, { description = "show the menubar", group = "launcher" }),
 })
 
 -- Tags related keybindings
 awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
     awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
-    awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
+    awful.key({ "Control" }, "Space", awful.tag.history.restore, { description = "go back", group = "tag" }),
 })
 
 -- Focus related keybindings
