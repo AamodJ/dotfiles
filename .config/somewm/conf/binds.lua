@@ -6,6 +6,13 @@ local function spawn(cmd)
     end
 end
 
+local function exec(cmd, arguments)
+    local args = arguments or {}
+    return function()
+        cmd(args)
+    end
+end
+
 -- {{{ Mouse bindings
 -- @DOC_ROOT_BUTTONS@
 awful.mouse.append_global_mousebindings({
@@ -22,21 +29,10 @@ awful.mouse.append_global_mousebindings({
 
 -- General Awesome keys
 awful.keyboard.append_global_keybindings({
-    awful.key({ super }, "w", function()
-        mymainmenu:show()
-    end, { description = "show main menu", group = "awesome" }),
     awful.key({ super, shift }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
     awful.key({ super, shift }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
-    awful.key({ super }, "l", function()
-        awful.tag.incmwfact(0.05)
-    end, { description = "increase master width factor", group = "layout" }),
-    awful.key({ super }, "Backspace", function()
-        awesome.lock()
-    end, { description = "lock screen", group = "awesome" }),
+    awful.key({ super }, "Backspace", exec(awesome.lock), { description = "lock screen", group = "awesome" }),
     awful.key({ super }, "Return", spawn(terminal), { description = "open a terminal", group = "launcher" }),
-    awful.key({ super }, "r", function()
-        awful.screen.focused().mypromptbox:run()
-    end, { description = "run prompt", group = "launcher" }),
 })
 
 -- Tags related keybindings
@@ -48,24 +44,24 @@ awful.keyboard.append_global_keybindings({
 
 -- Focus related keybindings
 awful.keyboard.append_global_keybindings({
-    awful.key({ super }, "j", function()
-        awful.client.focus.byidx(1)
-    end, { description = "focus next by index", group = "client" }),
-    awful.key({ super }, "k", function()
-        awful.client.focus.byidx(-1)
-    end, { description = "focus previous by index", group = "client" }),
     awful.key({ super }, "Tab", function()
         awful.client.focus.history.previous()
         if client.focus then
             client.focus:raise()
         end
     end, { description = "go back", group = "client" }),
-    awful.key({ super, ctrl }, "j", function()
-        awful.screen.focus_relative(1)
-    end, { description = "focus the next screen", group = "screen" }),
-    awful.key({ super, ctrl }, "k", function()
-        awful.screen.focus_relative(-1)
-    end, { description = "focus the previous screen", group = "screen" }),
+    awful.key(
+        { super, ctrl },
+        "j",
+        exec(awful.screen.focus_relative(1)),
+        { description = "focus the next screen", group = "screen" }
+    ),
+    awful.key(
+        { super, ctrl },
+        "k",
+        exec(awful.screen.focus_relative(-1)),
+        { description = "focus the previous screen", group = "screen" }
+    ),
     awful.key({ super, ctrl }, "n", function()
         local c = awful.client.restore()
         -- Focus restored client
@@ -73,38 +69,22 @@ awful.keyboard.append_global_keybindings({
             c:activate({ raise = true, context = "key.unminimize" })
         end
     end, { description = "restore minimized", group = "client" }),
+
+    -- Focus client hjkl
+    awful.key({ alt }, "h", exec(awful.client.focus.bydirection, "left"), { desc = "Focus up", group = "client" }),
+    awful.key({ alt }, "j", exec(awful.client.focus.bydirection, "down"), { desc = "Focus down", group = "client" }),
+    awful.key({ alt }, "k", exec(awful.client.focus.bydirection, "up"), { desc = "Focus up", group = "client" }),
+    awful.key({ alt }, "l", exec(awful.client.focus.bydirection, "right"), { desc = "Focus right", group = "client" }),
 })
 
 -- Layout related keybindings
 awful.keyboard.append_global_keybindings({
-    awful.key({ super, shift }, "j", function()
-        awful.client.swap.byidx(1)
-    end, { description = "swap with next client by index", group = "client" }),
-    awful.key({ super, shift }, "k", function()
-        awful.client.swap.byidx(-1)
-    end, { description = "swap with previous client by index", group = "client" }),
     awful.key({ super }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
-    awful.key({ super }, "h", function()
-        awful.tag.incmwfact(-0.05)
-    end, { description = "decrease master width factor", group = "layout" }),
-    awful.key({ super, shift }, "h", function()
-        awful.tag.incnmaster(1, nil, true)
-    end, { description = "increase the number of master clients", group = "layout" }),
-    awful.key({ super, shift }, "l", function()
-        awful.tag.incnmaster(-1, nil, true)
-    end, { description = "decrease the number of master clients", group = "layout" }),
-    awful.key({ super, ctrl }, "h", function()
-        awful.tag.incncol(1, nil, true)
-    end, { description = "increase the number of columns", group = "layout" }),
-    awful.key({ super, ctrl }, "l", function()
-        awful.tag.incncol(-1, nil, true)
-    end, { description = "decrease the number of columns", group = "layout" }),
-    awful.key({ super }, "space", function()
-        awful.layout.inc(1)
-    end, { description = "select next", group = "layout" }),
-    awful.key({ super, shift }, "space", function()
-        awful.layout.inc(-1)
-    end, { description = "select previous", group = "layout" }),
+    -- Swap client hjkl
+    awful.key({ super }, "h", exec(awful.client.swap.bydirection, "left"), { desc = "Swap up", group = "client" }),
+    awful.key({ super }, "j", exec(awful.client.swap.bydirection, "down"), { desc = "Swap down", group = "client" }),
+    awful.key({ super }, "k", exec(awful.client.swap.bydirection, "up"), { desc = "Swap up", group = "client" }),
+    awful.key({ super }, "l", exec(awful.client.swap.bydirection, "right"), { desc = "Swap right", group = "client" }),
 })
 
 -- @DOC_NUMBER_KEYBINDINGS@
@@ -124,20 +104,7 @@ awful.keyboard.append_global_keybindings({
         end,
     }),
     awful.key({
-        modifiers = { super, ctrl },
-        keygroup = "numrow",
-        description = "toggle tag",
-        group = "tag",
-        on_press = function(index)
-            local screen = awful.screen.focused()
-            local tag = screen.tags[index]
-            if tag then
-                awful.tag.viewtoggle(tag)
-            end
-        end,
-    }),
-    awful.key({
-        modifiers = { super, shift },
+        modifiers = { ctrl, shift },
         keygroup = "numrow",
         description = "move focused client to tag",
         group = "tag",
@@ -146,20 +113,7 @@ awful.keyboard.append_global_keybindings({
                 local tag = client.focus.screen.tags[index]
                 if tag then
                     client.focus:move_to_tag(tag)
-                end
-            end
-        end,
-    }),
-    awful.key({
-        modifiers = { super, "Control", "Shift" },
-        keygroup = "numrow",
-        description = "toggle focused client on tag",
-        group = "tag",
-        on_press = function(index)
-            if client.focus then
-                local tag = client.focus.screen.tags[index]
-                if tag then
-                    client.focus:toggle_tag(tag)
+                    tag:view_only()
                 end
             end
         end,
