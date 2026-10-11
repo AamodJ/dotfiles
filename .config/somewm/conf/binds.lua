@@ -195,9 +195,6 @@ client.connect_signal("request::default_keybindings", function()
         awful.key({ super, "Control" }, "Return", function(c)
             c:swap(awful.client.getmaster())
         end, { description = "move to master", group = "client" }),
-        awful.key({ super }, "o", function(c)
-            c:move_to_screen()
-        end, { description = "move to screen", group = "client" }),
         awful.key({ super }, "t", function(c)
             c.ontop = not c.ontop
         end, { description = "toggle keep on top", group = "client" }),
