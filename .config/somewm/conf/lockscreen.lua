@@ -1,3 +1,5 @@
+local awful = require("awful")
+
 awesome.connect_signal("idle::start", function()
     awesome.spawn("loginctl lock_session")
 end)
