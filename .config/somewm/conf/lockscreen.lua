@@ -1,9 +1,5 @@
 local awful = require("awful")
 
-awesome.connect_signal("idle::start", function()
-    awesome.spawn("loginctl lock_session")
-end)
-
 awesome.connect_signal("idle::stop", function()
     awesome.dpms_on()
     awesome.spawn("brightnessctl -r")
