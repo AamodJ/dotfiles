@@ -77,13 +77,13 @@ awful.keyboard.append_global_keybindings({
     awful.key(
         { super, ctrl },
         "j",
-        exec(awful.screen.focus_relative(1)),
+        exec(awful.screen.focus_relative, 1),
         { description = "focus the next screen", group = "screen" }
     ),
     awful.key(
         { super, ctrl },
         "k",
-        exec(awful.screen.focus_relative(-1)),
+        exec(awful.screen.focus_relative, -1),
         { description = "focus the previous screen", group = "screen" }
     ),
     awful.key({ super, ctrl }, "n", function()
@@ -109,9 +109,17 @@ awful.keyboard.append_global_keybindings({
     awful.key({ super }, "j", focus_or_swap("swap", "down"), { desc = "Swap down", group = "client" }),
     awful.key({ super }, "k", focus_or_swap("swap", "up"), { desc = "Swap up", group = "client" }),
     awful.key({ super }, "l", focus_or_swap("swap", "right"), { desc = "Swap right", group = "client" }),
-})
 
--- @DOC_NUMBER_KEYBINDINGS@
+    -- Swap client across monitors
+    awful.key({ super, alt }, "l", function()
+        local c = client.focus
+        c:move_to_screen(c.screen:get_next_in_direction("right"))
+    end, { desc = "Swap to right screen", group = "client" }),
+    awful.key({ super, alt }, "h", function()
+        local c = client.focus
+        c:move_to_screen(c.screen:get_next_in_direction("left"))
+    end, { desc = "Swap to left screen", group = "client" }),
+})
 
 awful.keyboard.append_global_keybindings({
     awful.key({
@@ -156,7 +164,6 @@ awful.keyboard.append_global_keybindings({
     }),
 })
 
--- @DOC_CLIENT_BUTTONS@
 client.connect_signal("request::default_mousebindings", function()
     awful.mouse.append_client_mousebindings({
         awful.button({}, 1, function(c)
@@ -171,16 +178,19 @@ client.connect_signal("request::default_mousebindings", function()
     })
 end)
 
--- @DOC_CLIENT_KEYBINDINGS@
 client.connect_signal("request::default_keybindings", function()
     awful.keyboard.append_client_keybindings({
+        awful.key({ alt }, "q", function(c)
+            c:kill()
+        end, { description = "close", group = "client" }),
         awful.key({ alt }, "f", function(c)
             c.fullscreen = not c.fullscreen
             c:raise()
         end, { description = "toggle fullscreen", group = "client" }),
-        awful.key({ alt }, "q", function(c)
-            c:kill()
-        end, { description = "close", group = "client" }),
+        -- awful.key({ alt }, "m", function(c)
+        --     c.sticky = not c.sticky
+        --     c.floating = not c.floating
+        -- end, { description = "toggle sticky", group = "client" }),
         awful.key({ alt }, "s", awful.client.floating.toggle, { description = "toggle floating", group = "client" }),
         awful.key({ super, "Control" }, "Return", function(c)
             c:swap(awful.client.getmaster())
