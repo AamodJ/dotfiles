@@ -49,3 +49,13 @@ require("conf.input")
 require("conf.tags")
 require("conf.notifications")
 require("conf.status-bar")
+require("conf.autostart")
+require("conf.lockscreen")
+
+naughty.notification({
+    title = "Somewm",
+    message = "Loaded config",
+    icon = "/usr/share/pixmaps/archlinux-logo.svg",
+    timeout = 2,
+    urgency = "low",
+})
