@@ -15,9 +15,3 @@ awful.input.dwtp = 1
 client.connect_signal("mouse::enter", function(c)
     c:activate({ context = "mouse_enter", raise = false })
 end)
-
--- Warp cursor to center of the client when switching focus
-client.connect_signal("focus", function(c)
-    local g = c:geometry()
-    mouse.coords({ x = g.x + g.width / 2, y = g.y + g.height / 2 })
-end)
