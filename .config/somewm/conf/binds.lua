@@ -1,8 +1,14 @@
 local awful = require("awful")
 
+-- Helper functions
 local function spawn(cmd)
     return function()
         awful.spawn(cmd)
+    end
+end
+local function spawn_with_shell(cmd)
+    return function()
+        awful.spawn.with_shell(cmd)
     end
 end
 
@@ -43,6 +49,24 @@ awful.keyboard.append_global_keybindings({
 })
 
 -- Focus related keybindings
+
+-- Helper function to center the mouse when changing focus / swapping windows
+local function focus_or_swap(cmd, dir)
+    return function()
+        if cmd == "focus" then
+            awful.client.focus.bydirection(dir)
+        elseif cmd == "swap" then
+            awful.client.swap.bydirection(dir)
+        else
+            error('Unknown command. You tried to focus or swap but got "' .. cmd .. '" instead')
+        end
+
+        -- Warp cursor to center of the client when switching focus
+        local g = client.focus:geometry()
+        mouse.coords({ x = g.x + g.width / 2, y = g.y + g.height / 2 })
+    end
+end
+
 awful.keyboard.append_global_keybindings({
     awful.key({ super }, "Tab", function()
         awful.client.focus.history.previous()
@@ -71,20 +95,20 @@ awful.keyboard.append_global_keybindings({
     end, { description = "restore minimized", group = "client" }),
 
     -- Focus client hjkl
-    awful.key({ alt }, "h", exec(awful.client.focus.bydirection, "left"), { desc = "Focus up", group = "client" }),
-    awful.key({ alt }, "j", exec(awful.client.focus.bydirection, "down"), { desc = "Focus down", group = "client" }),
-    awful.key({ alt }, "k", exec(awful.client.focus.bydirection, "up"), { desc = "Focus up", group = "client" }),
-    awful.key({ alt }, "l", exec(awful.client.focus.bydirection, "right"), { desc = "Focus right", group = "client" }),
+    awful.key({ alt }, "h", focus_or_swap("focus", "left"), { desc = "Focus up", group = "client" }),
+    awful.key({ alt }, "j", focus_or_swap("focus", "down"), { desc = "Focus down", group = "client" }),
+    awful.key({ alt }, "k", focus_or_swap("focus", "up"), { desc = "Focus up", group = "client" }),
+    awful.key({ alt }, "l", focus_or_swap("focus", "right"), { desc = "Focus right", group = "client" }),
 })
 
 -- Layout related keybindings
 awful.keyboard.append_global_keybindings({
     awful.key({ super }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
     -- Swap client hjkl
-    awful.key({ super }, "h", exec(awful.client.swap.bydirection, "left"), { desc = "Swap up", group = "client" }),
-    awful.key({ super }, "j", exec(awful.client.swap.bydirection, "down"), { desc = "Swap down", group = "client" }),
-    awful.key({ super }, "k", exec(awful.client.swap.bydirection, "up"), { desc = "Swap up", group = "client" }),
-    awful.key({ super }, "l", exec(awful.client.swap.bydirection, "right"), { desc = "Swap right", group = "client" }),
+    awful.key({ super }, "h", focus_or_swap("swap", "left"), { desc = "Swap up", group = "client" }),
+    awful.key({ super }, "j", focus_or_swap("swap", "down"), { desc = "Swap down", group = "client" }),
+    awful.key({ super }, "k", focus_or_swap("swap", "up"), { desc = "Swap up", group = "client" }),
+    awful.key({ super }, "l", focus_or_swap("swap", "right"), { desc = "Swap right", group = "client" }),
 })
 
 -- @DOC_NUMBER_KEYBINDINGS@
@@ -201,7 +225,11 @@ awful.keyboard.append_global_keybindings({
     awful.key({ super }, "Space", spawn("rofi -show calc -no-show-match -no-sort")),
     awful.key({ super }, "r", spawn("rofi -show emoji")),
     awful.key({ super }, "y", spawn("rofi -show ssh")),
-    awful.key({ super }, "v", spawn("cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy")),
+    awful.key(
+        { super },
+        "v",
+        spawn_with_shell("cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy")
+    ),
     awful.key(
         { super },
         "p",
@@ -210,4 +238,33 @@ awful.keyboard.append_global_keybindings({
         )
     ),
     awful.key({ super }, "o", spawn("rofi-kpxc")),
+})
+
+-- XF86 keybinds
+awful.keyboard.append_global_keybindings({
+    -- Audio
+    awful.key({}, "XF86AudioRaiseVolume", spawn("sink up")),
+    awful.key({}, "XF86AudioLowerVolume", spawn("sink down")),
+    awful.key({}, "XF86AudioMute", spawn("sink togglemute")),
+    awful.key({}, "XF86AudioMicMute", spawn("sink mic-mute")),
+    awful.key({ super }, "q", spawn("sink set")),
+
+    awful.key({}, "XF86AudioPlay", spawn("playerctl play-pause")),
+    awful.key({}, "XF86AudioNext", spawn("playerctl next")),
+    awful.key({}, "XF86AudioPrev", spawn("playerctl previous")),
+
+    -- Display
+    awful.key({}, "XF86MonBrightnessUp", spawn("backlight monup")),
+    awful.key({}, "XF86MonBrightnessDown", spawn("backlight mondown")),
+    awful.key({ super }, "w", spawn("backlight setmon")),
+    awful.key({}, "XF86KbdBrightnessUp", spawn("backlight kbdup")),
+    awful.key({}, "XF86KbdBrightnessDown", spawn("backlight kbddown")),
+})
+
+-- macOS like screenshots
+awful.keyboard.append_global_keybindings({
+    -- Audio
+    awful.key({ super, shift }, "3", spawn("screenshot")),
+    awful.key({ super, shift }, "4", spawn("screenshot region")),
+    awful.key({ super, shift }, "5", spawn("zoom")),
 })
