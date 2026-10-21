@@ -31,9 +31,6 @@ ruled.client.connect_signal("request::rules", function()
                 "Kruler",
                 "Nsxiv",
             },
-            title = {
-                "wayland-boomer",
-            },
             role = {
                 "AlarmWindow", -- Thunderbird's calendar.
                 "ConfigManager", -- Thunderbird's about:config.
@@ -43,6 +40,21 @@ ruled.client.connect_signal("request::rules", function()
         properties = {
             floating = true,
             placement = awful.placement.centered,
+        },
+    })
+
+    ruled.client.append_rule({
+        id = "wayland-boomer",
+        rule_any = {
+            name = {
+                "wayland-boomer",
+            },
+        },
+        properties = {
+            floating = true,
+            ontop = true,
+            x = 0,
+            y = 0,
         },
     })
 
