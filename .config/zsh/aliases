@@ -40,6 +40,7 @@ alias p1="ping 1.1.1.1"
 alias pa="ping archlinux.org"
 alias mons="hyprctl monitors all | less"
 alias cls="hyprctl clients | less"
+alias tmp="cd $(mktemp -d)"
 
 alias ldock="lazydocker"
 alias pdc="podman compose down && printf '\n\nShutdown all containers complete\n\n' && podman compose up -d  "
