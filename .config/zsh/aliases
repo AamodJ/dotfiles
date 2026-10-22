@@ -40,6 +40,7 @@ alias p1="ping 1.1.1.1"
 alias pa="ping archlinux.org"
 alias mons="hyprctl monitors all | less"
 alias cls="hyprctl clients | less"
+alias tmp="cd $(mktemp -d)"
 
 alias ldock="lazydocker"
 alias pdc="podman compose down && printf '\n\nShutdown all containers complete\n\n' && podman compose up -d  "
@@ -66,10 +67,13 @@ alias vimdiff="nvim -d"
 # Fun kitty features
 alias diff="kitty +kitten diff"
 alias gd="git difftool --no-symlinks --dir-diff"
+
+# Git related
 alias gg="git log --oneline --graph"
 alias ggs="gg -s"
 alias gs="git status"
 alias gr="git remote -v"
+alias gp="git pull"
 
 # Ansible QOL
 alias ag="ansible-galaxy"
