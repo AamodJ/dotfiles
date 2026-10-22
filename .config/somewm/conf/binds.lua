@@ -75,16 +75,16 @@ awful.keyboard.append_global_keybindings({
         end
     end, { description = "go back", group = "client" }),
     awful.key(
-        { super, ctrl },
-        "j",
-        exec(awful.screen.focus_relative, 1),
-        { description = "focus the next screen", group = "screen" }
+        { alt, shift },
+        "h",
+        exec(awful.screen.focus_bydirection, "left"),
+        { description = "focus left screen", group = "screen" }
     ),
     awful.key(
-        { super, ctrl },
-        "k",
-        exec(awful.screen.focus_relative, -1),
-        { description = "focus the previous screen", group = "screen" }
+        { alt, shift },
+        "l",
+        exec(awful.screen.focus_bydirection, "right"),
+        { description = "focus right screen", group = "screen" }
     ),
     awful.key({ super, ctrl }, "n", function()
         local c = awful.client.restore()
