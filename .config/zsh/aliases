@@ -66,10 +66,13 @@ alias vimdiff="nvim -d"
 # Fun kitty features
 alias diff="kitty +kitten diff"
 alias gd="git difftool --no-symlinks --dir-diff"
+
+# Git related
 alias gg="git log --oneline --graph"
 alias ggs="gg -s"
 alias gs="git status"
 alias gr="git remote -v"
+alias gp="git pull"
 
 # Ansible QOL
 alias ag="ansible-galaxy"
